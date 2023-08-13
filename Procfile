@@ -1,0 +1,1 @@
+web: gunicorn olshop.wsgi:application --log-file -
