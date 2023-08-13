@@ -1,0 +1,263 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script type="text/javascript" src={% static 'js/jquery.3.6.4.js' %}></script>
+    <script type="text/javascript" src={% static 'js/bootstrap5.bundle.min.js' %}></script>
+    <script src="{% static 'fontawesomefree/js/fontawesome.js' %}"></script>
+    <script src="{% static 'fontawesomefree/js/solid.js' %}"></script>
+    <script src="{% static 'fontawesomefree/js/brands.js' %}"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap5.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/mystyle.css'%}">
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+    <title>Online Shop</title>
+</head>
+
+<body>
+    <!-- The Modal -->
+<div class="modal fade" id="myModal">
+    {%csrf_token%}
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Modal Heading</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+          Modal body..
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  <!--end of modal-->
+    <div class="container-fluid fixed-top bg-white shadow" style="border-bottom:2px solid red;">
+                    
+            <div class="row d-flex justify-content-sm-between justify-content-md-between justify-content-lg-between justify-content-xl-between justify-content-xxl-between">
+                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-1 col-sm-1 col-1 py-2">
+                    <div class="d-flex ">
+                        <img src={% static 'img/jagoanhelm.png'%} style="width:60px;height:60px;margin-top:5px"/><span class="h4 py-3 text-danger fw-bold d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block">jagoanhelm.com</span>
+                    </div>
+                </div>
+                <div class="col-1 py-3" style="padding-top:14px !important">
+                    <div class="dropdown py-3 d-none d-sm-none  d-md-none d-lg-none d-xl-block d-xxl-block">
+                        <button class="dropdown-toggle w-100 text-danger fw-bold bg-white border-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-list-ul text-danger fw-bold"></i> Category
+                        </button>
+                        <ul class="dropdown-menu" style="width:600px" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item " href="#">Action</a></li>
+                        <li><a class="dropdown-item " href="#">Another action</a></li>
+                        <li><a class="dropdown-item " href="#">Something else here</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="py-2 col-xxl-5 col-xl-5 col-lg-4 col-md-8 col-sm-8 col-8">
+                    <div class="d-flex">
+                        <i class="fa shadow fa-search mx-1 text-white bg-danger rounded-pill rounded-end border border-danger p-2" style="padding-left:10px!important;padding-bottom:14px!important;margin-top:16px" style="cursor:pointer"></i></span>
+                        <input type="text" id="key_cari" class="h5 my-3 shadow form-control rounded-pill rounded-start " style="margin-left:-5px;border-left:0px;border-color:red"  onchange="tampil_search()" onfocusout="sembunyikan()" onclick="tampil_search()" onmouseover="tampil_search()" onkeyup="tampil_search()" placeholder="search in jagoanhelm..." autocomplete="on"/>
+                                            
+                    </div>
+                    <div class="d-none position-relative" id="pencarian" onmouseleave="sembunyikan()">
+                        <span class="position-absolute top-100 start-0 w-100  bg-white border p-2 overflow-auto border-danger rounded border-1" style="height:300px;width:200px">
+                            <p>Keyword Pencarian: <strong><span id="key_cari_tampil">&lt;Silakan Masukkan Pencarian&gt;</span></strong></p>
+                            <div id="hasil_ajax"></div>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-1 col-sm-1 col-md-1 col-lg-4 col-xl-3 col-xxl-3 py-3 d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block ">
+                    <div class="d-flex justify-content-evenly">
+                            <a href="#" class="btn btn-outline-danger" title="My Shopping Cart"><span><i class="m-2 fa-solid fa-cart-shopping h4 text-secondary "></i></span></a>
+                            <a href="#" class="btn btn-outline-danger" title="My Notification"><span><i class="m-2 fa-solid fa-bell h4 text-secondary "></i></span></a>
+                            <a href="#" class="btn btn-outline-danger" title="My Mail"><span><i class="m-2 fa-solid fa-envelope h4  text-secondary"></i></span></a>
+                            <a href="#" class="btn btn-outline-danger" title="My Account"><span><i class="m-2 fa-solid fa-user h4  text-secondary"></i></span></a>
+                    </div>
+                </div>
+                <div class="col-2 d-block d-sm-block d-md-block d-lg-none  d-xl-none d-xxl-none">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-bars h2 text-danger py-4" aria-hidden="true"></i>
+                    </a>
+                    <ul class="dropdown-menu w-100 border border-danger shadow"  aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item " href="#"><i class="mx-2 pt-4 fa-solid fa-user "></i> My Account: <span style="margin-top:-100px"> <button class="bg-danger border border-danger text-white rounded mx-2">login</button><button class="border border-danger bg-white rounded mx-2">register</button></span></a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item " href="#"><i class="mx-2 fa-solid fa-cart-shopping"></i> My Shopping Cart</a></li>
+                        <li><a class="dropdown-item " href="#"><i class="mx-2 fa-solid fa-bell text-secondary "></i> My Notification</a></li>
+                        <li><a class="dropdown-item " href="#"><i class="mx-2 fa-solid fa-envelope  text-secondary"></i> My Mail</a></li>
+
+                    </ul>
+                    
+                </div>
+            </div>
+
+    </div>
+    <div style="margin-top:100px !important"></div>
+    <div class="mt-sm-3 mt-md-3 mt-lg-0 mt-xl-0 mt-xxl-0">
+        {% if messages %}
+            {% for mes in messages %}
+            <div class="d-flex justify-content-center my-3">
+                <div class="alert alert-success alert-dismissible shadow fade show col-6">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    {{mes}}
+                </div>
+            </div>
+
+            {% endfor %}
+        {% endif %}
+        <div class="d-none d-sm-none d-md-block d-lg-block d-xl-block d-xxl-block">
+            {% include 'penjualan/banner_pc.html'%}
+        </div>
+        <div class="d-block d-sm-block d-md-none d-lg-none d-xl-none d-xxl-none">
+            {% include 'penjualan/banner_hp.html'%}
+        </div>
+        {% block contents %} {% endblock %}
+
+        <div class="fixed-bottom justify-content-end d-flex justify-items-center m-2">
+            <div class="d-none bg-white " id="chatnya" onmouseleave="nochat()" onmouseover="chatme()">
+                <div class="d-flex">
+                    <div class=" mx-1">
+                        <div class="bg-success text-white fw-bold rounded shadow p-1 " onclick="wa1()"  title="chat with whatsapp to admin #1" style="cursor:pointer">
+                            <img  src="{% static 'img/wa.webp'%}" class="shadow rounded-circle m-1 border border-white border-1" style="width:30px;height:30px" ><span class="mx-2">Admin-1</span>
+
+                        </div>
+                    </div>
+                    <div class=" mx-1">
+                        <div onclick="wa2()" class="bg-success  text-white fw-bold p-1 rounded shadow" title="chat with whatsapp to admin #2" style="cursor:pointer">
+                            <img   src="{% static 'img/wa.webp'%}" class="shadow rounded-circle m-1 border border-white border-1" style="width:30px;height:30px" > <span class="mx-2">Admin-2</span>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="btn btn-primary py-2" onmouseover="chatme()" style="height:50px" onmouseleave="nochat()"><i class="fa fa-user" style="color:white"></i> Chat</a>
+        </div>
+    </div>
+    <script>
+        let csrfmiddlewaretokennya=$("input[name=csrfmiddlewaretoken]").val();
+        function ubahKeUang(data) {
+            let x = data.toString();
+            let lebar = x.length-1;
+            let pengurangan=0;
+            let hasil="";
+            let tiga=1;
+
+            while(pengurangan<lebar+1) {
+                hasil = x[lebar-pengurangan] + hasil;
+                if(tiga%3==0 && pengurangan<lebar) {
+                    hasil = "." + hasil;
+                    tiga=0;
+                }
+                tiga++;
+                pengurangan++;
+            };
+            return ("Rp." + hasil + ",00");
+        }
+
+        function ubahEnter(data) {
+            if(data.trim().length > 0) {
+                let x = data.split('\n');
+                let hasil="";
+
+                x.forEach(function(splitnya){
+                    hasil=hasil+"<div>" + splitnya[0].toUpperCase() +splitnya.slice(1) +"</div>";
+                });
+
+                return hasil;
+            } else {
+                return data;
+            }
+        }
+
+        function call_modal() {
+
+        }
+
+        function tampil_search() {
+            let cari = $("#key_cari").val();
+            $("#pencarian").removeClass("d-none");
+            $("#pencarian").addClass("d-block");
+            if(cari.trim().length==0) {
+                $("#key_cari_tampil").text("<Silakan Masukkan Pencarian>");
+                $("#hasil_ajax").empty();
+            } else {
+                
+                /*ajax action*/
+               
+                $.post('http://192.168.1.50/api/get/produk/',
+                {
+                    "filter": cari,
+                    "csrfmiddlewaretoken":csrfmiddlewaretokennya
+                },
+                function(data) {
+                    $("#hasil_ajax").empty()
+                    if(data.length==0) {
+                        $("#hasil_ajax").append("<div><strong>Pencarian Tidak Ditemukan. Coba cari kata kunci lain yah...</strong></div");
+                    } else {
+                        $("#hasil_ajax").append("<div><strong>Hasil Pencarian ("+ data.length +" items):</strong></div>");
+                        data.forEach(function(element,index){
+                            let mydiv = "<div class='container p-2 my-1 d-flex justify-content-evelny shadow border border-danger border-1 rounded' style='cursor:pointer'  title=' Klik Untuk Melihat Detail [" + element.produk_nama +"] !'><div class='d-flex align-items-center mx-1'><img class='rounded' src='"+ element.gambar1 +"' style='width:60px;height:60px;'/></div><div class='d-flex align-items-center'><p>"+
+                                (index+1).toString() + ". <strong>" + element.produk_nama  + " - " + ubahKeUang(element.produk_harga) + "</strong></p></div>"
+                            $("#hasil_ajax").append(mydiv);
+                        });
+
+                    }
+                },"json"
+                );
+                $("#key_cari_tampil").text(cari);
+            }
+
+        }
+
+        function chatme() {
+            $("#chatnya").removeClass("d-none");
+            $("#chatnya").addClass("d-block");
+        }
+        function nochat() {
+            $("#chatnya").removeClass("d-block");
+            $("#chatnya").addClass("d-none");
+        }
+        function wa1() {
+            window.open("http://wa.me/+6281213270275?text=Hallo admin, saya ingin informasi lebih lanjut!","_blank");
+        }
+        function wa2() {
+            window.open("http://wa.me/+628122852230?text=Hallo admin, saya ingin informasi lebih lanjut!","_blank");
+        }
+        function tele() {
+            $.post("/adm/c/telegram/",
+            {
+                csrfmiddlewaretoken: csrfmiddlewaretokennya,
+                nomor_HP: $("#nomerhp").val()
+            })
+        }
+        function tampilkan() {
+
+            tampil_search();
+        }
+        function sembunyikan() {
+            $("#pencarian").removeClass("d-block");
+            $("#pencarian").addClass("d-none");
+        }
+        function tampilkan2() {
+            $("#pencarian2").removeClass("d-none");
+            $("#pencarian2").addClass("d-block");
+        }
+        function sembunyikan2() {
+            $("#pencarian2").removeClass("d-block");
+            $("#pencarian2").addClass("d-none");
+        }
+    </script>
+</body>
+
+</html>

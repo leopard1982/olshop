@@ -1,0 +1,23 @@
+body {
+    font-size: 14px;
+    font-family: url("../fonts/JosefinSans-Bold.ttf");
+}
+
+.items:hover {
+    box-shadow: 2px 2px orange;
+    border: 1px solid red;
+    cursor: pointer;
+}
+
+.items {
+    margin: 3px;
+    padding: 1px;
+    border-radius: 5px;
+    width: 150px;
+    min-width: 150px;
+    min-height: 200px;
+    height: 200px;
+    border: 1px solid grey;
+    font-size: 10px;
+    text-align: center;
+}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block contents %}
+    <div class="container my-2">
+        {% if user.is_authenticated %}
+        <p class="text-center">you are logged! welcome <strong>{{user.first_name|title}} {{user.last_name|title}}</strong>! (logged as <strong>{{user.username}}</strong>)</p>
+        {% endif%}
+
+        <div class="justify-content-center d-flex">
+            
+            <form class="form p-3  border border-success border-1 rounded shadow" action="" method="post">
+                <p class="h3 py-2">Sign Up Form</p>
+                {% csrf_token %}
+                {{forms.as_p}}
+                <br>
+                <input type="submit" class="btn btn-primary" value="Sign Up"/>
+            </form>
+        </div>
+    </div>
+
+{% endblock%}

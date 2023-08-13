@@ -1,0 +1,149 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block menu %}
+<div class="container h1 text-center">
+Penjualan
+</div>
+{% endblock%}
+{% block contents %}
+
+
+<div class="row d-flex justify-content-center" style="margin-top:20px">
+    <div class=" fw-bold d-flex justify-content-between  rounded  shadow  text-white border bg-white col-11" style="background-image:linear-gradient(to right,red,white)">
+        <div class="p-1">
+            <i class="fa-regular fa-window-maximize"  style="margin-right:20px"></i>  Produk <strong>Terbaru!</strong>
+        </div>
+        <div>
+            <img src={% static 'img/wow.png'%} style="width:35px;height:30px">
+        </div>
+    </div>
+</div>
+<div class="container d-flex justify-content-center  p-2">
+    <div class="d-flex overflow-auto mx-2" id="list_items"></div>
+</div>
+
+<div class="row d-flex justify-content-center" style="margin-top:20px" >
+    <div class=" fw-bold d-flex justify-content-between  rounded  shadow  text-white border bg-white col-11" style="background-image:linear-gradient(to right,red,white)">
+        <div class="p-1">
+            <i class="fa-regular fa-window-maximize" style="margin-right:20px"></i> <strong>Pilihan</strong> Pembeli
+        </div>
+        <div>
+            <img src={% static 'img/ok_red.png'%} style="width:25px;height:25px">
+        </div>
+    </div>
+</div>
+<div class="container d-flex justify-content-center  p-2">
+    <div class="d-flex overflow-auto mx-2" id="list_items2"></div>
+</div>
+
+<div class="row d-flex justify-content-center" style="margin-top:20px">
+    <div class=" fw-bold d-flex justify-content-between  rounded  shadow  text-white border bg-white col-11" style="background-image:linear-gradient(to right,red,white)">
+        <div class="p-1">
+            <i class="fa-regular fa-money-bill-1" style="margin-right:20px"></i></i> <strong>Cuci</strong> Gudang - DISKON BESAR!
+        </div>
+        <div>
+            <img src={% static 'img/discount.png'%} style="width:35px;height:25px">
+        </div>
+    </div>
+</div>
+<div class="container d-flex justify-content-center  p-2">
+    <div class="d-flex overflow-auto mx-2" id="list_items3"></div>
+</div>
+
+<div class="row d-flex justify-content-center" style="margin-top:20px">
+    <div class=" fw-bold d-flex justify-content-between  rounded  shadow  text-white border bg-white col-11" style="background-image:linear-gradient(to right,red,white)">
+        <div class="p-1">
+            <i class="fa-regular fa-money-bill-1" style="margin-right:20px"></i></i> <strong>Produk</strong> Terbaik!
+        </div>
+        <div>
+            <img src={% static 'img/jagoanhelm.png'%} style="width:35px;height:35px">
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row d-flex justify-content-evenly" style="margin-top:15px" id="all_list">
+    </div>
+</div>
+
+<!--tampilan untuk hp-->
+<div class="d-block d-sm-block d-md-none d-lg-none d-xl-none d-xxl-none container">
+    <div class="mt-2 p-2 border border-danger border-1 w-100 bg-danger text-white rounded">
+        <span class="h3 fw-bold">Helm Zorin</span>
+    </div>
+    <div class="mt-2 p-2 border border-danger border-1 w-100 bg-white  rounded">
+        <p>{% lorem 1 b random %}</p>
+        <div class=" d-flex justify-content-evenly">
+            <div class="col-1 ">Qty:</div>
+            <div class="col-3"><input type="text" class=" py-1 w-50 border border-danger border-1" style="height:25px"></div>
+            <div class="col-4"><button class="rounded border-success border border-1 text-success"><i class="fa fa-cart-shopping text-success "></i> Add Cart</button></div>
+            <div class="col-4"><button class="rounded border-primary border border-1 text-primary"><i class="fa-regular fa-money-bill-1 text-primary"></i> Buy Now</button></div>
+        </div>
+    </div>
+</div>
+    <!--end of tampilan hp-->
+<!--tampilan PC-->
+<div class="container-fluid my-3 mx-2 d-none d-sm-none d-md-block d-lg-block d-xl-block d-xxl-block">
+    <div class="row d-flex">
+            <div class="col-6">
+                <div class="mt-2 p-2 border border-danger border-1 w-100 bg-danger text-white rounded">
+                    <span class="h3 fw-bold">Helm Zorin</span>
+                </div>
+                <div class="mt-2 p-2 border border-danger border-1 w-100 bg-white  rounded">
+                    <p>{% lorem 1 b random %}</p>
+                    <div class=" d-flex justify-content-between">
+                        <div class="col-1 ">Qty:</div>
+                        <div class="col-3"><input type="text" class=" py-1 w-50 border border-danger border-1" style="height:25px"></div>
+                        <div class="col-4"><button class="border-success border border-1 rounded-pill text-success"><i class="fa fa-cart-shopping text-success "></i> Add Cart</button></div>
+                        <div class="col-4"><button class="border-primary border border-1 rounded-pill text-primary"><i class="fa-regular fa-money-bill-1 text-primary"></i> Buy Now</button></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+            </div>
+    </div>
+</div>
+<!--end of tampilan pc-->
+<br><br><br>
+<script>
+
+    $(document).ready(function() {
+        $.post('http://192.168.1.50/api/get/produk/',{
+            'filter':'',
+            'csrfmiddlewaretoken':$("input[name=csrfmiddlewaretoken]").val(),
+        },
+        function(data) {
+            data.forEach(function(element){
+                let template = "<div class='items mx-2'>" +
+                    "<img src='" + element.gambar1 +"'  style='border:1px solid grey;height:100px;width:140px;margin-top:10px;margin-bottom:10px;border-radius:10px'/>" +
+                    "<p><strong>"+element.produk_nama+"</strong></p>"+
+                    "<p>Harga: <strong>" + ubahKeUang(element.produk_harga) +"</strong></p></div>";
+                    $("#list_items").append(template);
+                    $("#list_items").append(template);
+                    $("#list_items").append(template);
+                    $("#list_items").append(template);
+                    $("#list_items2").append(template);
+                    $("#list_items2").append(template);
+                    $("#list_items2").append(template);
+                    $("#list_items2").append(template);
+                    $("#list_items3").append(template);
+                    $("#list_items3").append(template);
+                    $("#list_items3").append(template);
+                    $("#list_items3").append(template);
+                    $("#list_items3").append(template);
+                    $("#all_list").append(template);
+                    $("#all_list").append(template);
+                    $("#all_list").append(template);
+                    $("#all_list").append(template);
+                    $("#all_list").append(template);
+                    $("#all_list").append(template);
+                    $("#all_list").append(template);
+                    $("#all_list").append(template);
+                    $("#all_list").append(template);
+
+            });
+        }
+        )
+    });
+</script>
+
+{% endblock %}
