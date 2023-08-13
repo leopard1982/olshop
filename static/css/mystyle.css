@@ -1,6 +1,12 @@
+@font-face {
+    font-family: alone;
+    src: local('alone'),
+        url('/static/fonts/alone.otf') format('opentype');
+}
+
 body {
-    font-size: 14px;
-    font-family: url("../fonts/JosefinSans-Bold.ttf");
+    font-size: 18px;
+    font-family: alone;
 }
 
 .items:hover {
@@ -15,9 +21,9 @@ body {
     border-radius: 5px;
     width: 150px;
     min-width: 150px;
-    min-height: 170px;
-    height: 170px;
+    min-height: 190px;
+    height: 190px;
     border: 1px solid grey;
-    font-size: 10px;
+    font-size: 15px;
     text-align: center;
 }
