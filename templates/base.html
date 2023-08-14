@@ -17,22 +17,49 @@
         <!-- The Modal -->
         <div class="modal fade" id="myModal">
     
-            <div class="modal-dialog">
+            <div class="modal-dialog w-100">
               <div class="modal-content">
           
                 <!-- Modal Header -->
                 <div class="modal-header">
-                  <h4 class="modal-title" id="header_modal"></h4>
+                  <h4 class="modal-title text-danger" id="header_modal"></h4>
                   <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
           
                 <!-- Modal body -->
-                <div class="modal-body" id="isi_modal">
+                <div class="modal-body">
+                    <div class="d-flex row justify-content-center">
+                        <div class="d-flex overflow-auto p-2 mx-3 border border-danger border-1 rounded">
+                            <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
+                            <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
+                            <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
+                            <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
+                            <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
+                            <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
+                            <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
+                            <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
+                            <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
+                            <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
+
+                        </div>
+                        <div>
+                            <div><u>DESKRIPSI PRODUK:</u></div>
+                            <div id="isi_modal"></div>
+                        </div>
+                        <div class="my-2 p-2 border border-danger border-1 ">
+                            <div class="text-center">Harga : <span id="harga"></div>
+                            <div class="justify-content-evenly d-flex">
+                                <button class="btn btn-primary"><i class="fa fa-cart-plus mx-2"></i> Tambahkan ke Cart</button>
+                                <button class="btn btn-success"><i class="fa fa-credit-card mx-2"></i> Beli Sekarang</button>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
           
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Tutup</button>
                 </div>
           
               </div>
@@ -205,8 +232,9 @@
                                 (index+1).toString() + ". <strong>" + element.produk_nama  + " - " + ubahKeUang(element.produk_harga) + "</strong></p></div>"
                             $("#hasil_ajax").append(mydiv);
                             $("#mobile_" + element.produk_kode).mouseover(function(){
-                                $("#isi_modal").text(element.produk_kode);
+                                $("#isi_modal").html(ubahEnter(element.produk_deskripsi));
                                 $("#header_modal").text(element.produk_nama);
+                                $("#harga").text(ubahKeUang(element.produk_harga));
                                 $("#myModal").modal("show");
                             });
                         });
@@ -216,8 +244,9 @@
                                 "<span style='margin-left:30px'>" + (index+1).toString() + ". <strong>" + element.produk_nama  + " - " + ubahKeUang(element.produk_harga) + "</strong></span>"
                             $("#hasil_ajax").append(mydiv);
                             $("#pc_" + element.produk_kode).click(function(){
-                                $("#isi_modal").text(element.produk_kode);
+                                $("#isi_modal").html(ubahEnter(element.produk_deskripsi));
                                 $("#header_modal").text(element.produk_nama);
+                                $("#harga").text(ubahKeUang(element.produk_harga));
                                 $("#myModal").modal("show");
                             });
                         });

@@ -9,28 +9,54 @@ Penjualan
 
         <!-- The Modal -->
         <div class="modal fade" id="myModal2">
-    
-            <div class="modal-dialog">
-              <div class="modal-content">
-          
-                <!-- Modal Header -->
-                <div class="modal-header">
-                  <h4 class="modal-title" id="header_modal2">hallo</h4>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            <div class="modal-dialog w-100">
+                <div class="modal-content">
+            
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                    <h4 class="modal-title text-danger" id="header_modal2"></h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                  </div>
+            
+                  <!-- Modal body -->
+                  <div class="modal-body">
+                      <div class="d-flex row justify-content-center">
+                          <div class="d-flex overflow-auto p-2 mx-3 border border-danger border-1 rounded">
+                              <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
+                              <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
+                              <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
+                              <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
+                              <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
+                              <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
+                              <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
+                              <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
+                              <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
+                              <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
+  
+                          </div>
+                          <div>
+                              <div><u>DESKRIPSI PRODUK:</u></div>
+                              <div id="isi_modal2"></div>
+                          </div>
+                          <div class="my-2 p-2 border border-danger border-1 ">
+                              <div class="text-center">Harga : <span id="harga2"></div>
+                              <div class="justify-content-evenly d-flex">
+                                  <button class="btn btn-primary"><i class="fa fa-cart-plus mx-2"></i> Tambahkan ke Cart</button>
+                                  <button class="btn btn-success"><i class="fa fa-credit-card mx-2"></i> Beli Sekarang</button>
+                              </div>
+                          </div>
+  
+                      </div>
+                  </div>
+            
+                  <!-- Modal footer -->
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Tutup</button>
+                  </div>
+            
                 </div>
-          
-                <!-- Modal body -->
-                <div class="modal-body" id="isi_modal2">
-                </div>
-          
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                </div>
-          
               </div>
-            </div>
-          </div>
+        </div>
           <!--end of modal-->
     
 
@@ -150,7 +176,8 @@ Penjualan
                     $("#list_items").append(template);
                     $("#terbaru_" + element.produk_kode).click(function() {
                         $("#header_modal2").text(element.produk_nama);
-                        $("#isi_modal2").text(element.produk_kode);
+                        $("#isi_modal2").html(ubahEnter(element.produk_deskripsi));
+                        $("#harga2").text(ubahKeUang(element.produk_harga)); 
                         $("#myModal2").modal("show");
                     });
                 template = "<div class='items mx-2 bg-white' style='border: 1px solid lightcoral' id='pilihan_"+element.produk_kode+"'>" +
@@ -160,7 +187,8 @@ Penjualan
                         $("#list_items2").append(template);
                         $("#pilihan_" + element.produk_kode).click(function() {
                             $("#header_modal2").text(element.produk_nama);
-                            $("#isi_modal2").text(element.produk_kode);
+                            $("#isi_modal2").html(ubahEnter(element.produk_deskripsi));
+                            $("#harga2").text(ubahKeUang(element.produk_harga));     
                             $("#myModal2").modal("show");
                         });    
                 template = "<div class='items mx-2 bg-white' style='border: 1px solid lightcoral' id='diskon_"+element.produk_kode+"'>" +
@@ -170,7 +198,8 @@ Penjualan
                             $("#list_items3").append(template);
                             $("#diskon_" + element.produk_kode).click(function() {
                                 $("#header_modal2").text(element.produk_nama);
-                                $("#isi_modal2").text(element.produk_kode);
+                                $("#isi_modal2").html(ubahEnter(element.produk_deskripsi));
+                                $("#harga2").text(ubahKeUang(element.produk_harga));         
                                 $("#myModal2").modal("show");
                             });
                 template = "<div class='items mx-2 bg-white' style='border: 1px solid lightcoral' id='semua_"+element.produk_kode+"'>" +
@@ -180,7 +209,8 @@ Penjualan
                                 $("#all_list").append(template);
                                 $("#semua_" + element.produk_kode).click(function() {
                                     $("#header_modal2").text(element.produk_nama);
-                                    $("#isi_modal2").text(element.produk_kode);
+                                    $("#isi_modal2").html(ubahEnter(element.produk_deskripsi));
+                                    $("#harga2").text(ubahKeUang(element.produk_harga));             
                                     $("#myModal2").modal("show");
                                 });                    
                     /*$("#list_items").append(template);
