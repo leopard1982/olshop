@@ -14,32 +14,32 @@
 </head>
 
 <body>
-    <!-- The Modal -->
-<div class="modal fade" id="myModal">
+        <!-- The Modal -->
+        <div class="modal fade" id="myModal">
+    
+            <div class="modal-dialog">
+              <div class="modal-content">
+          
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h4 class="modal-title" id="header_modal"></h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+          
+                <!-- Modal body -->
+                <div class="modal-body" id="isi_modal">
+                </div>
+          
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+          
+              </div>
+            </div>
+          </div>
+          <!--end of modal-->
     {%csrf_token%}
-    <div class="modal-dialog">
-      <div class="modal-content">
-  
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">Modal Heading</h4>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-  
-        <!-- Modal body -->
-        <div class="modal-body">
-          Modal body..
-        </div>
-  
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-        </div>
-  
-      </div>
-    </div>
-  </div>
-  <!--end of modal-->
     <div class="container-fluid fixed-top bg-white shadow" style="border-bottom:2px solid red;">
                     
             <div class="row d-flex justify-content-sm-between justify-content-md-between justify-content-lg-between justify-content-xl-between justify-content-xxl-between">
@@ -198,13 +198,29 @@
                     if(data.length==0) {
                         $("#hasil_ajax").append("<div><strong>Pencarian Tidak Ditemukan. Coba cari kata kunci lain yah...</strong></div");
                     } else {
+                        /*untuk android karena g bs onclick tapi pakai event mouseover*/
                         $("#hasil_ajax").append("<div><strong>Hasil Pencarian ("+ data.length +" items):</strong></div>");
                         data.forEach(function(element,index){
-                            let mydiv = "<div class='container p-2 my-1 d-flex justify-content-evelny shadow border border-danger border-1 rounded' style='cursor:pointer'  title=' Klik Untuk Melihat Detail [" + element.produk_nama +"] !'><div class='d-flex align-items-center mx-1'><img class='rounded' src='"+ element.gambar1 +"' style='width:60px;height:60px;'/></div><div class='d-flex align-items-center'><p>"+
+                            let mydiv = "<div class='container d-block d-sm-block d-md-none d-lg-none d-xl-none d-xxl-none p-2 my-1 d-flex justify-content-evenly shadow border border-danger border-1 rounded' style='cursor:pointer' id='mobile_"+element.produk_kode+"' title=' Klik Untuk Melihat Detail [" + element.produk_nama +"] !'><div class='d-flex align-items-center mx-1'><img class='rounded' src='"+ element.gambar1 +"' style='width:60px;height:60px;'/></div><div class='d-flex align-items-center'><p>"+
                                 (index+1).toString() + ". <strong>" + element.produk_nama  + " - " + ubahKeUang(element.produk_harga) + "</strong></p></div>"
                             $("#hasil_ajax").append(mydiv);
+                            $("#mobile_" + element.produk_kode).mouseover(function(){
+                                $("#isi_modal").text(element.produk_kode);
+                                $("#header_modal").text(element.produk_nama);
+                                $("#myModal").modal("show");
+                            });
                         });
-
+                        /*untuk PC pakai event onclick*/
+                        data.forEach(function(element,index){
+                            let mydiv = "<div class='container d-none d-sm-none d-md-block d-lg-block d-xl-block d-xxl-block p-2 my-1 d-flex justify-content-between shadow border border-danger border-1 rounded' style='cursor:pointer' id='pc_"+element.produk_kode+"' title=' Klik Untuk Melihat Detail [" + element.produk_nama +"] !'><img class='rounded' src='"+ element.gambar1 +"' style='width:60px;height:60px;'/>"+
+                                "<span style='margin-left:30px'>" + (index+1).toString() + ". <strong>" + element.produk_nama  + " - " + ubahKeUang(element.produk_harga) + "</strong></span>"
+                            $("#hasil_ajax").append(mydiv);
+                            $("#pc_" + element.produk_kode).click(function(){
+                                $("#isi_modal").text(element.produk_kode);
+                                $("#header_modal").text(element.produk_nama);
+                                $("#myModal").modal("show");
+                            });
+                        });
                     }
                 },"json"
                 );
@@ -239,16 +255,20 @@
             tampil_search();
         }
         function sembunyikan() {
-            $("#pencarian").removeClass("d-block");
+            $("#pencarian").removeClass("d-flex");
             $("#pencarian").addClass("d-none");
         }
         function tampilkan2() {
             $("#pencarian2").removeClass("d-none");
-            $("#pencarian2").addClass("d-block");
+            $("#pencarian2").addClass("d-flex");
         }
         function sembunyikan2() {
             $("#pencarian2").removeClass("d-block");
             $("#pencarian2").addClass("d-none");
+        }
+
+        function showmodal_2() {
+            $("#myModal").modal("show");
         }
     </script>
 </body>
