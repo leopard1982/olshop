@@ -5,16 +5,11 @@
 <head>
     <script type="text/javascript" src={% static 'js/jquery.3.6.4.js' %}></script>
     <script type="text/javascript" src={% static 'js/bootstrap5.bundle.min.js' %}></script>
-    <script src="{% static 'fontawesomefree/js/fontawesome.js' %}"></script>
-    <script src="{% static 'fontawesomefree/js/solid.js' %}"></script>
-    <script src="{% static 'fontawesomefree/js/brands.js' %}"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/bootstrap5.min.css'%}">
     <link rel="stylesheet" href="{% static 'css/mystyle.css'%}">
-    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Online Shop</title>
 </head>
 
@@ -66,10 +61,8 @@
                     </div>
                 </div>
                 <div class="py-2 col-xxl-5 col-xl-5 col-lg-4 col-md-8 col-sm-8 col-8">
-                    <div class="d-flex">
-                        
-                        <input type="text" id="key_cari" class="h5 my-3 shadow form-control rounded-pill  " style="margin-left:-5px;border-color:red"  onchange="tampil_search()" onfocusout="sembunyikan()" onclick="tampil_search()" onmouseover="tampil_search()" onkeyup="tampil_search()" placeholder="search in jagoanhelm..." autocomplete="on"/>
-                                            
+                    <div class="d-flex justify-content-center">
+                        <div class="text-secondary bg-danger my-3 py-1 px-2 rounded-pill rounded-end" style="border-top:1px solid red;border-bottom:1px solid red; border-left:1px solid red;height:40px"><i class="text-white fa fa-search"></i></div><input type="text" id="key_cari" class="h5 my-3 shadow form-control rounded-pill  rounded-start" style="border-left:0px;border-color:red"  onchange="tampil_search()" onfocusout="sembunyikan()" onclick="tampil_search()" onmouseover="tampil_search()" onkeyup="tampil_search()" placeholder="search in jagoanhelm..." autocomplete="on"/>   
                     </div>
                     <div class="d-none position-relative" id="pencarian" onmouseleave="sembunyikan()">
                         <span class="position-absolute top-100 start-0 w-100  bg-white border p-2 overflow-auto border-danger rounded border-1" style="height:300px;width:200px">
@@ -80,10 +73,10 @@
                 </div>
                 <div class="col-1 col-sm-1 col-md-1 col-lg-4 col-xl-3 col-xxl-3 py-3 d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block ">
                     <div class="d-flex justify-content-evenly">
-                            <a href="#" class="btn btn-outline-danger" title="My Shopping Cart"><span><i class="m-2 fa-solid fa-cart-shopping h4 text-secondary "></i></span></a>
-                            <a href="#" class="btn btn-outline-danger" title="My Notification"><span><i class="m-2 fa-solid fa-bell h4 text-secondary "></i></span></a>
-                            <a href="#" class="btn btn-outline-danger" title="My Mail"><span><i class="m-2 fa-solid fa-envelope h4  text-secondary"></i></span></a>
-                            <a href="#" class="btn btn-outline-danger" title="My Account"><span><i class="m-2 fa-solid fa-user h4  text-secondary"></i></span></a>
+                            <a href="#" class="btn btn-outline-danger" title="My Shopping Cart"><span><i class="m-2 fa fa-cart-plus  " style="font-size:30px"></i></span></a>
+                            <a href="#" class="btn btn-outline-danger" title="My Notification"><span><i class="m-2 fa fa-bell "  style="font-size:30px"></i></span></a>
+                            <a href="#" class="btn btn-outline-danger" title="My Mail"><span><i class="m-2 fa fa-envelope "  style="font-size:30px"></i></span></a>
+                            <a href="#" class="btn btn-outline-danger" title="My Account"><span><i class="m-2 fa fa-user "  style="font-size:30px"></i></span></a>
                     </div>
                 </div>
                 <div class="col-2 d-block d-sm-block d-md-block d-lg-none  d-xl-none d-xxl-none">
@@ -91,11 +84,11 @@
                         <i class="fa fa-bars h2 text-danger py-4" aria-hidden="true"></i>
                     </a>
                     <ul class="dropdown-menu w-100 border border-danger shadow"  aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item " href="#"><i class="mx-2 pt-4 fa-solid fa-user "></i> My Account: <span style="margin-top:-100px"> <button class="bg-danger border border-danger text-white rounded mx-2">login</button><button class="border border-danger bg-white rounded mx-2">register</button></span></a></li>
+                        <li><a class="dropdown-item " href="#"><i class="mx-2 pt-4 fa fa-user "></i> My Account: <span style="margin-top:-100px"> <button class="bg-danger border border-danger text-white rounded mx-2">login</button><button class="border border-danger bg-white rounded mx-2">register</button></span></a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item " href="#"><i class="mx-2 fa-solid fa-cart-shopping"></i> My Shopping Cart</a></li>
-                        <li><a class="dropdown-item " href="#"><i class="mx-2 fa-solid fa-bell text-secondary "></i> My Notification</a></li>
-                        <li><a class="dropdown-item " href="#"><i class="mx-2 fa-solid fa-envelope  text-secondary"></i> My Mail</a></li>
+                        <li><a class="dropdown-item " href="#"><i class="mx-2 fa fa-cart-plus" aria-hidden="true"></i> My Shopping Cart</a></li>
+                        <li><a class="dropdown-item " href="#"><i class="mx-2 fa fa-bell text-secondary "></i> My Notification</a></li>
+                        <li><a class="dropdown-item " href="#"><i class="mx-2 fa fa-envelope  text-secondary"></i> My Mail</a></li>
 
                     </ul>
                     

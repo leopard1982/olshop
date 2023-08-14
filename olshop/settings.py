@@ -15,9 +15,6 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-fontawesomefree="6.4.2"
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -44,7 +41,6 @@ INSTALLED_APPS = [
     'administrasi',
     'django.contrib.humanize',
     'rest_framework',
-    'fontawesomefree',
     'api_rest',
     'corsheaders',
 ]

@@ -10,8 +10,10 @@ body {
 }
 
 .items:hover {
-    box-shadow: 2px 2px orange;
-    border: 1px solid red;
+    box-shadow: 2px 2px 2px 2px gold;
+    border-color: red;
+    border-width: 3px;
+    border-right-width: 5px;
     cursor: pointer;
 }
 
@@ -23,7 +25,8 @@ body {
     min-width: 150px;
     min-height: 190px;
     height: 190px;
-    border: 1px solid grey;
+    border: 1px solid lightcoral;
     font-size: 15px;
     text-align: center;
+
 }

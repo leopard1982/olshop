@@ -9,53 +9,54 @@ Penjualan
 
 
 <div class="row d-flex justify-content-center" style="margin-top:20px">
-    <div class=" fw-bold d-flex justify-content-between  rounded  shadow  text-white border bg-white col-11" style="background-image:linear-gradient(to right,red,white)">
+    <div class=" fw-bold d-flex justify-content-between  rounded  shadow  text-white border  col-11 " style="background-color:red" >
         <div class="p-1">
-            <i class="fa-regular fa-window-maximize"  style="margin-right:20px"></i>  Produk <strong>Terbaru!</strong>
+            <i class="fa fa-cloud-upload"  style="margin-right:20px"></i>  Produk <strong>Terbaru!</strong>
         </div>
-        <div>
+        <div  class="bg-white rounded-circle justify-content-center align-items-center d-flex" style="width:35px;height:35px">
             <img src={% static 'img/wow.png'%} style="width:35px;height:30px">
         </div>
     </div>
 </div>
-<div class="container d-flex justify-content-center  p-2">
-    <div class="d-flex overflow-auto mx-2" id="list_items"></div>
+<div class="container-fluid d-flex justify-content-center border border-danger border-1 rounded rounded-top  col-11">
+    <div class="d-flex overflow-auto mx-2 p-2" id="list_items"  ></div>
 </div>
 
 <div class="row d-flex justify-content-center" style="margin-top:20px" >
-    <div class=" fw-bold d-flex justify-content-between  rounded  shadow  text-white border bg-white col-11" style="background-image:linear-gradient(to right,red,white)">
+    <div class=" fw-bold d-flex justify-content-between  rounded  shadow  text-white border  col-11 " style="background-color:red" >
+
         <div class="p-1">
-            <i class="fa-regular fa-window-maximize" style="margin-right:20px"></i> <strong>Pilihan</strong> Pembeli
+            <i class="fa fa-gratipay" style="margin-right:20px"></i> <strong>Pilihan</strong> Pembeli
         </div>
-        <div>
+        <div  class="bg-white rounded-circle justify-content-center d-flex" style="width:35px;height:35px">
             <img src={% static 'img/ok_red.png'%} style="width:25px;height:25px">
         </div>
     </div>
 </div>
-<div class="container d-flex justify-content-center  p-2">
-    <div class="d-flex overflow-auto mx-2" id="list_items2"></div>
+<div class="container-fluid d-flex justify-content-center border border-danger border-1 rounded rounded-top  col-11">
+    <div class="d-flex overflow-auto mx-2 p-2" id="list_items2"></div>
 </div>
 
 <div class="row d-flex justify-content-center" style="margin-top:20px">
-    <div class=" fw-bold d-flex justify-content-between  rounded  shadow  text-white border bg-white col-11" style="background-image:linear-gradient(to right,red,white)">
+    <div class=" fw-bold d-flex justify-content-between  rounded  shadow  text-white border  col-11 " style="background-color:red" >
         <div class="p-1">
-            <i class="fa-regular fa-money-bill-1" style="margin-right:20px"></i></i> <strong>Cuci</strong> Gudang - DISKON BESAR!
+            <i class="fa fa-handshake-o" style="margin-right:20px"></i></i> <strong>Cuci</strong> Gudang - DISKON BESAR!
         </div>
-        <div>
+        <div  class="bg-white rounded-circle justify-content-center align-items-center d-flex" style="width:35px;height:35px">
             <img src={% static 'img/discount.png'%} style="width:35px;height:25px">
         </div>
     </div>
 </div>
-<div class="container d-flex justify-content-center  p-2">
-    <div class="d-flex overflow-auto mx-2" id="list_items3"></div>
+<div class="container-fluid d-flex justify-content-center border border-danger border-1 rounded rounded-top  col-11">
+    <div class="d-flex overflow-auto mx-2 p-2" id="list_items3"></div>
 </div>
 
 <div class="row d-flex justify-content-center" style="margin-top:20px">
-    <div class=" fw-bold d-flex justify-content-between  rounded  shadow  text-white border bg-white col-11" style="background-image:linear-gradient(to right,red,white)">
+    <div class=" fw-bold d-flex justify-content-between  rounded  shadow  text-white border  col-11 " style="background-color:red" >
         <div class="p-1">
-            <i class="fa-regular fa-money-bill-1" style="margin-right:20px"></i></i> <strong>Produk</strong> Terbaik!
+            <i class="fa fa-gg-circle" style="margin-right:20px"></i></i> <strong>Produk</strong> Terbaik!
         </div>
-        <div>
+        <div  class="bg-white rounded-circle justify-content-center align-items-center d-flex" style="width:35px;height:35px">
             <img src={% static 'img/jagoanhelm.png'%} style="width:35px;height:35px">
         </div>
     </div>
@@ -113,8 +114,8 @@ Penjualan
         },
         function(data) {
             data.forEach(function(element){
-                let template = "<div class='items mx-2'>" +
-                    "<img src='" + element.gambar1 +"'  style='border:1px solid grey;height:100px;width:140px;margin-top:10px;margin-bottom:10px;border-radius:10px'/>" +
+                let template = "<div class='items mx-2 bg-white' style='border: 1px solid lightcoral'>" +
+                    "<img src='" + element.gambar1 +"'  style='border:1px solid white;height:100px;width:140px;margin-top:10px;margin-bottom:10px;border-radius:10px'/>" +
                     "<p><strong>"+element.produk_nama+"</strong></p>"+
                     "<p>Harga: <strong>" + ubahKeUang(element.produk_harga) +"</strong></p></div>";
                     $("#list_items").append(template);

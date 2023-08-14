@@ -3,7 +3,7 @@ from administrasi.forms import formUsers
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
-from telethon import TelegramClient, events, sync
+
 
 # Create your views here.
 def dashboard(request):
