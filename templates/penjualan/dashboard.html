@@ -13,36 +13,24 @@ Penjualan
                 <div class="modal-content">
             
                   <!-- Modal Header -->
-                  <div class="modal-header">
-                    <h4 class="modal-title text-danger" id="header_modal2"></h4>
+                  <div class="modal-header text-white fw-bold bg-danger">
+                    <h4 class="modal-title text-white" id="header_modal2"></h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                   </div>
             
                   <!-- Modal body -->
                   <div class="modal-body">
                       <div class="d-flex row justify-content-center">
-                          <div class="d-flex overflow-auto p-2 mx-3 border border-danger border-1 rounded">
-                              <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
-                              <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
-                              <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
-                              <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
-                              <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
-                              <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
-                              <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
-                              <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
-                              <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
-                              <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
-  
-                          </div>
-                          <div>
+                          <div class="d-flex overflow-auto p-2 mx-3 border border-danger border-1 rounded" id="gambar_model2"></div>
+                          <div class="  my-2 border border-danger border-1 bg-white shadow p-2">
                               <div><u>DESKRIPSI PRODUK:</u></div>
                               <div id="isi_modal2"></div>
                           </div>
                           <div class="my-2 p-2 border border-danger border-1 ">
                               <div class="text-center">Harga : <span id="harga2"></div>
                               <div class="justify-content-evenly d-flex">
-                                  <button class="btn btn-primary"><i class="fa fa-cart-plus mx-2"></i> Tambahkan ke Cart</button>
-                                  <button class="btn btn-success"><i class="fa fa-credit-card mx-2"></i> Beli Sekarang</button>
+                                  <button class="btn btn-primary" style="font-size:12px"><i class="fa fa-cart-plus mx-2"></i> Tambahkan ke Cart</button>
+                                  <button class="btn btn-success" style="font-size:12px"><i class="fa fa-credit-card mx-2"></i> Beli Sekarang</button>
                               </div>
                           </div>
   
@@ -169,6 +157,24 @@ Penjualan
         },
         function(data) {
             data.forEach(function(element){
+                let gambar = [];
+                if (element.gambar1!=null)
+                    gambar.push(element.gambar1);
+                if (element.gambar2!=null)
+                    gambar.push(element.gambar2);
+                if (element.gambar3!=null)
+                    gambar.push(element.gambar3);
+                if (element.gambar4!=null)
+                    gambar.push(element.gambar4);
+                if (element.gambar5!=null)
+                    gambar.push(element.gambar5);
+                if (element.gambar6!=null)
+                    gambar.push(element.gambar6);
+                if (element.gambar7!=null)
+                    gambar.push(element.gambar7);
+                if (element.gambar8!=null)
+                    gambar.push(element.gambar8);
+
                 let template = "<div class='items mx-2 bg-white' style='border: 1px solid lightcoral' id='terbaru_"+element.produk_kode+"'>" +
                     "<img src='" + element.gambar1 +"'  style='border:1px solid white;height:100px;width:140px;margin-top:10px;margin-bottom:10px;border-radius:10px'/>" +
                     "<p><strong>"+element.produk_nama+"</strong></p>"+
@@ -177,7 +183,13 @@ Penjualan
                     $("#terbaru_" + element.produk_kode).click(function() {
                         $("#header_modal2").text(element.produk_nama);
                         $("#isi_modal2").html(ubahEnter(element.produk_deskripsi));
-                        $("#harga2").text(ubahKeUang(element.produk_harga)); 
+                        $("#harga2").text(ubahKeUang(element.produk_harga));
+                        $("#gambar_model2").empty();
+                        for(let i=0;i<gambar.length;i++) {
+                            $("#gambar_model2").append(
+                                "<img src='" + gambar[i]+"' class='items2 mx-2 rounded shadow' style='width:200px;height:200px'>"
+                            );
+                        } 
                         $("#myModal2").modal("show");
                     });
                 template = "<div class='items mx-2 bg-white' style='border: 1px solid lightcoral' id='pilihan_"+element.produk_kode+"'>" +
@@ -189,6 +201,12 @@ Penjualan
                             $("#header_modal2").text(element.produk_nama);
                             $("#isi_modal2").html(ubahEnter(element.produk_deskripsi));
                             $("#harga2").text(ubahKeUang(element.produk_harga));     
+                            $("#gambar_model2").empty();
+                            for(let i=0;i<gambar.length;i++) {
+                                $("#gambar_model2").append(
+                                    "<img src='" + gambar[i]+"' class='items2 mx-2 rounded shadow' style='width:200px;height:200px'>"
+                                );
+                            } 
                             $("#myModal2").modal("show");
                         });    
                 template = "<div class='items mx-2 bg-white' style='border: 1px solid lightcoral' id='diskon_"+element.produk_kode+"'>" +
@@ -199,7 +217,13 @@ Penjualan
                             $("#diskon_" + element.produk_kode).click(function() {
                                 $("#header_modal2").text(element.produk_nama);
                                 $("#isi_modal2").html(ubahEnter(element.produk_deskripsi));
-                                $("#harga2").text(ubahKeUang(element.produk_harga));         
+                                $("#harga2").text(ubahKeUang(element.produk_harga));      
+                                $("#gambar_model2").empty();
+                                for(let i=0;i<gambar.length;i++) {
+                                    $("#gambar_model2").append(
+                                        "<img src='" + gambar[i]+"' class='items2 mx-2 rounded shadow' style='width:200px;height:200px'>"
+                                    );
+                                }    
                                 $("#myModal2").modal("show");
                             });
                 template = "<div class='items mx-2 bg-white' style='border: 1px solid lightcoral' id='semua_"+element.produk_kode+"'>" +
@@ -210,7 +234,13 @@ Penjualan
                                 $("#semua_" + element.produk_kode).click(function() {
                                     $("#header_modal2").text(element.produk_nama);
                                     $("#isi_modal2").html(ubahEnter(element.produk_deskripsi));
-                                    $("#harga2").text(ubahKeUang(element.produk_harga));             
+                                    $("#harga2").text(ubahKeUang(element.produk_harga)); 
+                                    $("#gambar_model2").empty();      
+                                    for(let i=0;i<gambar.length;i++) {
+                                        $("#gambar_model2").append(
+                                            "<img src='" + gambar[i]+"' class='items2 mx-2 rounded shadow' style='width:200px;height:200px'>"
+                                        );
+                                    }       
                                     $("#myModal2").modal("show");
                                 });                    
                     /*$("#list_items").append(template);

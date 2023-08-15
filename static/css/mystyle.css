@@ -1,20 +1,22 @@
 @font-face {
-    font-family: alone;
-    src: local('alone'),
-        url('/static/fonts/alone.otf') format('opentype');
+    font-family: roboto;
+    src: local('roboto'),
+        url('/static/fonts/Roboto-Regular.ttf') format('truetype');
 }
 
 body {
-    font-size: 18px;
-    font-family: alone;
+    font-size: 15px;
+    font-family: roboto;
 }
 
-.items:hover {
+.items:hover,
+.items2:hover {
     box-shadow: 2px 2px 2px 2px gold;
     border-color: red;
     border-width: 3px;
     border-right-width: 5px;
     cursor: pointer;
+    transform: scale(1.1, 1.1);
 }
 
 .items {
@@ -26,7 +28,20 @@ body {
     min-height: 190px;
     height: 190px;
     border: 1px solid lightcoral;
-    font-size: 15px;
+    font-size: 12px;
+    text-align: center;
+}
+
+.items2 {
+    margin: 3px;
+    padding: 1px;
+    border-radius: 5px;
+    width: 190px;
+    min-width: 190px;
+    min-height: 190px;
+    height: 190px;
+    border: 1px solid lightcoral;
+    font-size: 12px;
     text-align: center;
 
 }

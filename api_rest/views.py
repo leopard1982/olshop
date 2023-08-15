@@ -7,7 +7,7 @@ from api_rest.models import Produk
 from django.db.models import Q
 
 # Create your views here.
-@api_view(['POST','GET'])
+@api_view(['POST'])
 def add_produk(request):
     if request.method == 'POST':
         serial = serialProduk(data=request.data)
@@ -24,5 +24,7 @@ def get_produk(request):
     if request.method == 'POST':
         datanya = datanya.filter(Q(produk_kode__icontains=request.POST['filter']) | Q(produk_nama__icontains=request.POST['filter']))
 
-    serial = serialProduk(datanya,many=True)
-    return Response(serial.data)
+        serial = serialProduk(datanya,many=True)
+        return Response(serial.data)
+    else:
+        return Response({'error':'Invalid'})

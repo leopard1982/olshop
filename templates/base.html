@@ -14,56 +14,146 @@
 </head>
 
 <body>
-        <!-- The Modal -->
+    <!--modal konfirmasi-->
+    <div class="modal fade" id="modalKonfirmasi">
+    
+        <div class="modal-dialog w-100">
+            <div class="modal-content">
+        
+              <!-- Modal Header -->
+              <div class="modal-header text-white fw-bold bg-warning">
+                <h2 class="modal-title text-white fw-bold" id="konfirmasi_header"></h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+              </div>
+        
+              <!-- Modal body -->
+              <div class="modal-body">
+                <div id="konfirmasi_body"></div>
+              </div>
+        
+              <!-- Modal footer -->
+              <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="mx-2 btn btn-outline-danger" data-bs-dismiss="modal">OK</button>
+            </div>
+        
+            </div>
+          </div>
+      </div>
+    <!--end Modal Login-->
+
+    <!--end modal konfirmasi-->
+
+    <!--Modal Login-->
+    <div class="modal fade" id="modalLogin">
+    
+        <div class="modal-dialog w-100">
+            <div class="modal-content">
+        
+              <!-- Modal Header -->
+              <div class="modal-header text-white fw-bold bg-primary">
+                <h2 class="modal-title text-white fw-bold">LOGIN</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+              </div>
+        
+              <!-- Modal body -->
+              <div class="modal-body">
+                <div>Username:</div>
+                <div><input type="text" placeholder="User Name" class="form-control shadow" id="user_login"/></div>
+                <div>Password:</div>
+                <div><input type="password" placeholder="Password" class="form-control shadow" id="password_login"></div>
+
+              </div>
+        
+              <!-- Modal footer -->
+              <div class="modal-footer d-flex justify-content-center">
+                <div>
+                    <button type="button" class="mx-2 btn btn-outline-primary" data-bs-dismiss="modal" onclick="login_user()">&lt; Login</button>
+                    <button type="button" class="mx-2 btn btn-outline-danger" data-bs-dismiss="modal">Batal &gt;</button>
+                </div>
+                <div>
+                    Not Have An Account? <a href="#" onclick="show_modalregister()">Register</a>
+                </div>
+              </div>
+        
+            </div>
+          </div>
+      </div>
+    <!--end Modal Login-->
+
+        <!--Modal Register-->
+        <div class="modal fade" id="modalRegister">
+    
+            <div class="modal-dialog w-100">
+                <div class="modal-content">
+            
+                  <!-- Modal Header -->
+                  <div class="modal-header text-white fw-bold bg-success">
+                    <h2 class="modal-title text-white fw-bold">REGISTER NEW USER</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                  </div>
+            
+                  <!-- Modal body -->
+                  <div class="modal-body">
+                    <form>
+                    {{form.as_p}}
+                    </form>
+                  </div>
+            
+                  <!-- Modal footer -->
+                  <div class="modal-footer d-flex justify-content-center">
+                    <div>
+                        <button type="button" class="mx-2 btn btn-outline-primary" data-bs-dismiss="modal" onclick="daftar_user()">&lt; Register</button>
+                        <button type="button" class="mx-2 btn btn-outline-danger" data-bs-dismiss="modal">Batal &gt;</button>
+                    </div>
+                    <div>
+                        Already User? <a href="#" onclick="show_login()">Login</a>
+                    </div>
+                  </div>
+            
+                </div>
+              </div>
+          </div>
+        <!--end Modal Register-->
+
+
+        <!-- Modal View List -->
         <div class="modal fade" id="myModal">
     
             <div class="modal-dialog w-100">
-              <div class="modal-content">
-          
-                <!-- Modal Header -->
-                <div class="modal-header">
-                  <h4 class="modal-title text-danger" id="header_modal"></h4>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <div class="modal-content">
+            
+                  <!-- Modal Header -->
+                  <div class="modal-header text-white fw-bold bg-danger">
+                    <h2 class="modal-title text-white fw-bold" id="header_modal"></h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                  </div>
+            
+                  <!-- Modal body -->
+                  <div class="modal-body">
+                      <div class="d-flex row justify-content-center">
+                          <div class="d-flex overflow-auto p-2 mx-3 border border-danger border-1 rounded" id="gambar_model"></div>
+                          <div  class="  my-2 border border-danger border-1 bg-white shadow p-2">
+                              <div><u>DESKRIPSI PRODUK:</u></div>
+                              <div id="isi_modal"></div>
+                          </div>
+                          <div class="my-2 p-2 border border-danger border-1 ">
+                              <div class="text-center">Harga : <span id="harga"></div>
+                              <div class="justify-content-evenly d-flex">
+                                  <button class="btn btn-primary" style="font-size:12px"><i class="fa fa-cart-plus mx-2"></i> Tambahkan ke Cart</button>
+                                  <button class="btn btn-success" style="font-size:12px"><i class="fa fa-credit-card mx-2"></i> Beli Sekarang</button>
+                              </div>
+                          </div>
+  
+                      </div>
+                  </div>
+            
+                  <!-- Modal footer -->
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Tutup</button>
+                  </div>
+            
                 </div>
-          
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <div class="d-flex row justify-content-center">
-                        <div class="d-flex overflow-auto p-2 mx-3 border border-danger border-1 rounded">
-                            <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
-                            <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
-                            <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
-                            <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
-                            <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
-                            <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
-                            <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
-                            <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
-                            <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
-                            <img src="{% static 'img/jagoanhelm.png'%}" class="items mx-2 rounded shadow" style="width:200px;height:200px">
-
-                        </div>
-                        <div>
-                            <div><u>DESKRIPSI PRODUK:</u></div>
-                            <div id="isi_modal"></div>
-                        </div>
-                        <div class="my-2 p-2 border border-danger border-1 ">
-                            <div class="text-center">Harga : <span id="harga"></div>
-                            <div class="justify-content-evenly d-flex">
-                                <button class="btn btn-primary"><i class="fa fa-cart-plus mx-2"></i> Tambahkan ke Cart</button>
-                                <button class="btn btn-success"><i class="fa fa-credit-card mx-2"></i> Beli Sekarang</button>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-          
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Tutup</button>
-                </div>
-          
               </div>
-            </div>
           </div>
           <!--end of modal-->
     {%csrf_token%}
@@ -77,7 +167,7 @@
                 </div>
                 <div class="col-1 py-2" style="padding-top:14px !important">
                     <div class="dropdown py-3 d-none d-sm-none  d-md-none d-lg-none d-xl-block d-xxl-block">
-                        <button class="dropdown-toggle w-100 text-danger fw-bold bg-white border-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="m-1 dropdown-toggle w-100 text-danger fw-bold bg-white border-0" style="font-size:16px" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-list-ul text-danger fw-bold"></i> Category
                         </button>
                         <ul class="dropdown-menu" style="width:600px" aria-labelledby="dropdownMenuButton1">
@@ -100,10 +190,24 @@
                 </div>
                 <div class="col-1 col-sm-1 col-md-1 col-lg-4 col-xl-3 col-xxl-3 py-3 d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block ">
                     <div class="d-flex justify-content-evenly">
-                            <a href="#" class="btn btn-outline-danger" title="My Shopping Cart"><span><i class="m-2 fa fa-cart-plus  " style="font-size:30px"></i></span></a>
-                            <a href="#" class="btn btn-outline-danger" title="My Notification"><span><i class="m-2 fa fa-bell "  style="font-size:30px"></i></span></a>
-                            <a href="#" class="btn btn-outline-danger" title="My Mail"><span><i class="m-2 fa fa-envelope "  style="font-size:30px"></i></span></a>
-                            <a href="#" class="btn btn-outline-danger" title="My Account"><span><i class="m-2 fa fa-user "  style="font-size:30px"></i></span></a>
+                            <a href="#" class="btn btn-outline-danger" title="My Shopping Cart"><span><i class="m-2 fa fa-cart-plus  " style="font-size:20px"></i></span></a>
+                            <a href="#" class="btn btn-outline-danger" title="My Notification"><span><i class="m-2 fa fa-bell "  style="font-size:20px"></i></span></a>
+                            <a href="#" class="btn btn-outline-danger" title="My Mail"><span><i class="m-2 fa fa-envelope "  style="font-size:20px"></i></span></a>
+                            <div class="dropdown">
+                                <a href="#" class="btn btn-outline-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" title="My Account"><span><i class="m-2 fa fa-user "  style="font-size:20px"></i></span></a>
+                                <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" href="#" onclick="show_login()">Login</a></li>
+                                  <li><a class="dropdown-item" href="#" onclick="show_modalregister()">Register</a></li>
+                                </ul>
+                            </div>
+                            
+                    </div>
+                    <div class='d-flex justify-content-center'>
+                        {% if user.is_authenticated %}
+                        <div class="text-center  px-2 col-10 text-white mt-1 bg-danger rounded-pill" style="font-size:12px">welcome.. <strong>{{user.username}}<strong>!</div>
+                        {% else %}
+                        <div class="text-center px-2 col-10 border border-danger mt-1 border-1 rounded-pill text-danger" style="font-size:12px">hi.. please <strong style="cursor:pointer" onclick="show_login()"><u>login</u></strong>!</div>
+                        {% endif%}
                     </div>
                 </div>
                 <div class="col-2 d-block d-sm-block d-md-block d-lg-none  d-xl-none d-xxl-none">
@@ -111,7 +215,7 @@
                         <i class="fa fa-bars h2 text-danger py-4" aria-hidden="true"></i>
                     </a>
                     <ul class="dropdown-menu w-100 border border-danger shadow"  aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item " href="#"><i class="mx-2 pt-4 fa fa-user "></i> My Account: <span style="margin-top:-100px"> <button class="bg-danger border border-danger text-white rounded mx-2">login</button><button class="border border-danger bg-white rounded mx-2">register</button></span></a></li>
+                        <li><a class="dropdown-item " href="#"><i class="mx-2 pt-4 fa fa-user "></i> My Account: <span style="margin-top:-100px"> <button class="bg-primary border border-primary text-white rounded mx-2" onclick="show_login()">login</button><button class="border border-success bg-white rounded mx-2" onclick="show_modalregister()">register</button></span></a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item " href="#"><i class="mx-2 fa fa-cart-plus" aria-hidden="true"></i> My Shopping Cart</a></li>
                         <li><a class="dropdown-item " href="#"><i class="mx-2 fa fa-bell text-secondary "></i> My Notification</a></li>
@@ -228,27 +332,60 @@
                         /*untuk android karena g bs onclick tapi pakai event mouseover*/
                         $("#hasil_ajax").append("<div><strong>Hasil Pencarian ("+ data.length +" items):</strong></div>");
                         data.forEach(function(element,index){
-                            let mydiv = "<div class='container d-block d-sm-block d-md-none d-lg-none d-xl-none d-xxl-none p-2 my-1 d-flex justify-content-evenly shadow border border-danger border-1 rounded' style='cursor:pointer' id='mobile_"+element.produk_kode+"' title=' Klik Untuk Melihat Detail [" + element.produk_nama +"] !'><div class='d-flex align-items-center mx-1'><img class='rounded' src='"+ element.gambar1 +"' style='width:60px;height:60px;'/></div><div class='d-flex align-items-center'><p>"+
-                                (index+1).toString() + ". <strong>" + element.produk_nama  + " - " + ubahKeUang(element.produk_harga) + "</strong></p></div>"
-                            $("#hasil_ajax").append(mydiv);
-                            $("#mobile_" + element.produk_kode).mouseover(function(){
-                                $("#isi_modal").html(ubahEnter(element.produk_deskripsi));
-                                $("#header_modal").text(element.produk_nama);
-                                $("#harga").text(ubahKeUang(element.produk_harga));
-                                $("#myModal").modal("show");
-                            });
-                        });
-                        /*untuk PC pakai event onclick*/
-                        data.forEach(function(element,index){
-                            let mydiv = "<div class='container d-none d-sm-none d-md-block d-lg-block d-xl-block d-xxl-block p-2 my-1 d-flex justify-content-between shadow border border-danger border-1 rounded' style='cursor:pointer' id='pc_"+element.produk_kode+"' title=' Klik Untuk Melihat Detail [" + element.produk_nama +"] !'><img class='rounded' src='"+ element.gambar1 +"' style='width:60px;height:60px;'/>"+
-                                "<span style='margin-left:30px'>" + (index+1).toString() + ". <strong>" + element.produk_nama  + " - " + ubahKeUang(element.produk_harga) + "</strong></span>"
-                            $("#hasil_ajax").append(mydiv);
-                            $("#pc_" + element.produk_kode).click(function(){
-                                $("#isi_modal").html(ubahEnter(element.produk_deskripsi));
-                                $("#header_modal").text(element.produk_nama);
-                                $("#harga").text(ubahKeUang(element.produk_harga));
-                                $("#myModal").modal("show");
-                            });
+                            let gambar = [];
+                            if (element.gambar1!=null)
+                                gambar.push(element.gambar1);
+                            if (element.gambar2!=null)
+                                gambar.push(element.gambar2);
+                            if (element.gambar3!=null)
+                                gambar.push(element.gambar3);
+                            if (element.gambar4!=null)
+                                gambar.push(element.gambar4);
+                            if (element.gambar5!=null)
+                                gambar.push(element.gambar5);
+                            if (element.gambar6!=null)
+                                gambar.push(element.gambar6);
+                            if (element.gambar7!=null)
+                                gambar.push(element.gambar7);
+                            if (element.gambar8!=null)
+                                gambar.push(element.gambar8);
+                            
+                            {% comment %} mobile {% endcomment %}
+                            let template = "<div class='container d-block d-sm-block d-md-none d-lg-none d-xl-none d-xxl-none  mx-2 bg-white' style='border: 1px solid lightcoral;cursor:pointer;' id='mobile_"+element.produk_kode+"'>" +
+                                    "<img src='" + element.gambar1 +"'  style='border:1px solid white;height:100px;width:140px;margin-top:10px;margin-bottom:10px;border-radius:10px'/>" +
+                                    "<strong>"+element.produk_nama+"</strong>"+
+                                    "Harga: <strong>" + ubahKeUang(element.produk_harga) +"</strong></div>";
+                                    $("#hasil_ajax").append(template);
+                                    $("#mobile_" + element.produk_kode).mouseover(function() {
+                                        $("#header_modal").text(element.produk_nama);
+                                        $("#isi_modal").html(ubahEnter(element.produk_deskripsi));
+                                        $("#harga").text(ubahKeUang(element.produk_harga));
+                                        $("#gambar_model").empty();
+                                        for(let i=0;i<gambar.length;i++) {
+                                            $("#gambar_model").append(
+                                                "<img src='" + gambar[i]+"' class='items2 mx-2 rounded shadow' style='width:200px;height:200px'>"
+                                            );
+                                        } 
+                                        $("#myModal").modal("show");
+                                    });
+                            {% comment %} PC {% endcomment %}
+                            template = "<div class='container d-none d-sm-none d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-between mx-2 bg-white ' style='border: 1px solid lightcoral;cursor:pointer;' id='pc_"+element.produk_kode+"'>" +
+                                            "<div class='col-2'><img src='" + element.gambar1 +"'  style='border:1px solid white;height:100px;width:140px;margin-top:10px;margin-bottom:10px;border-radius:10px'/></div>" +
+                                            "<div class='col-8  py-4'><strong class='h3'>"+element.produk_nama+"</strong><br>"+
+                                            "Harga: <strong>" + ubahKeUang(element.produk_harga) +"</strong></div></div>";
+                                            $("#hasil_ajax").append(template);
+                                            $("#pc_" + element.produk_kode).click(function() {
+                                                $("#header_modal").text(element.produk_nama);
+                                                $("#isi_modal").html(ubahEnter(element.produk_deskripsi));
+                                                $("#harga").text(ubahKeUang(element.produk_harga));
+                                                $("#gambar_model").empty();
+                                                for(let i=0;i<gambar.length;i++) {
+                                                    $("#gambar_model").append(
+                                                        "<img src='" + gambar[i]+"' class='items mx-2 rounded shadow' style='width:200px;height:200px'>"
+                                                    );
+                                                } 
+                                                $("#myModal").modal("show");
+                                            });    
                         });
                     }
                 },"json"
@@ -296,8 +433,57 @@
             $("#pencarian2").addClass("d-none");
         }
 
-        function showmodal_2() {
-            $("#myModal").modal("show");
+        function show_modalregister() {
+            $("#modalRegister").modal("show");
+            $("#modalLogin").modal("hide");
+        }
+
+        function show_login() {
+            $("#modalRegister").modal("hide");
+            $("#modalLogin").modal("show");
+        }
+
+        function daftar_user() {
+            let username = $("#id_username").val();
+            let password = $("#id_password").val();
+            let first_name = $("#id_first_name").val();
+            let last_name = $("#id_last_name").val();
+            let email = $("#id_email").val();
+            let password2 = $("#id_password2").val();
+
+            console.log(username);
+
+            if(username.length ==0 && password.length ==0 && email.length ==0 && password2.length ==0 && first_name.length == 0 && last_name.length == 0) {
+                $("#konfirmasi_header").text("Harus Diisi Lengkap!");
+                $("#konfirmasi_body").text("Semua Field Harus Diisi Lengkap Sebelum Melanjutkan...");
+                $("#modalKonfirmasi").modal("show");
+            } else {
+                if (password!=password2) {
+                    $("#konfirmasi_header").text("Password Berbeda!");
+                    $("#konfirmasi_body").text("Password Pertama dan Kedua harus sama yah....");
+                    $("#modalKonfirmasi").modal("show");
+                } else {
+                    $("#konfirmasi_header").text("Data Sudah Lengkap!");
+                    $("#konfirmasi_body").text("Silakan Klik OK untuk melanjutkan Pendaftaran User Baru...");
+                    $("#modalKonfirmasi").modal("show");
+                }
+            }
+        }
+
+        function login_user() {
+            let username = $("#user_login").val();
+            let password = $("#password_login").val();
+
+            console.log(username, password);
+            console.log("login?");
+
+            if(username.length>0 && password.length>0) {
+                window.location.reload();
+            } else {
+                $("#konfirmasi_header").text("Error Login!");
+                $("#konfirmasi_body").text("Username dan Password Harus diisi yah...");
+                $("#modalKonfirmasi").modal("show");
+            }
         }
     </script>
 </body>
