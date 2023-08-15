@@ -451,9 +451,8 @@
             let email = $("#id_email").val();
             let password2 = $("#id_password2").val();
 
-            console.log(username);
 
-            if(username.length ==0 && password.length ==0 && email.length ==0 && password2.length ==0 && first_name.length == 0 && last_name.length == 0) {
+            if(username.length ==0 || password.length ==0 || email.length ==0 || password2.length ==0 || first_name.length == 0 || last_name.length == 0) {
                 $("#konfirmasi_header").text("Harus Diisi Lengkap!");
                 $("#konfirmasi_body").text("Semua Field Harus Diisi Lengkap Sebelum Melanjutkan...");
                 $("#modalKonfirmasi").modal("show");
@@ -477,12 +476,12 @@
             console.log(username, password);
             console.log("login?");
 
-            if(username.length>0 && password.length>0) {
-                window.location.reload();
-            } else {
+            if(username.length==0 || password.length==0) {
                 $("#konfirmasi_header").text("Error Login!");
                 $("#konfirmasi_body").text("Username dan Password Harus diisi yah...");
                 $("#modalKonfirmasi").modal("show");
+            } else {
+                window.location.reload();
             }
         }
     </script>
