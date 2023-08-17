@@ -1,0 +1,67 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script type="text/javascript" src={% static 'js/jquery.3.6.4.js' %}></script>
+    <script type="text/javascript" src={% static 'js/bootstrap5.bundle.min.js' %}></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap5.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/mystyle.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>jagoanhelm.com - Management</title>
+</head>
+
+<body>
+    <div class="fixed-top ">
+        <div class="collapse" id="navbarToggleExternalContent">
+            <div class="p-2 d-flex">
+                <p>
+                <h4 class="mx-3 py-2">Master Data:</h4>
+                <div>
+                    <a href="/adm/master/upload/propinsi/" class="link m-2 btn btn-primary">Data Propinsi</a>
+                    <a href="/adm/master/upload/kota/" class="link m-2 btn btn-primary">Data Kota/Kabupaten</a>
+                    <a href="/adm/master/upload/kecamatan/" class="link m-2 btn btn-primary">Data Kecamatan</a>
+                </div>
+                </p>
+                <p style="border-left:1px solid red;margin-left:5px">
+                <h4 class="mx-3 py-2">Pengaturan:</h4>
+                <div>
+                    <a href="#" class="link m-2 btn btn-success">Item/ Barang</a>
+                    <a href="#" class="link m-2 btn btn-success">Banner</a>
+                    <a href="#" class="link m-2 btn btn-success">Voucher</a>
+                </div>
+                </p>
+
+            </div>
+        </div>
+        <div class="d-flex justify-content-between bg-danger">
+            <div class="h3 fw-bold text-white">
+                <img src="{% static 'img/jagoanhelm.png'%}" style="width:80px;height:80px" alt="" /> jagoanhelm.com
+            </div>
+            <nav class="navbar navbar-dark bg-danger">
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+        <div class="py-1  text-dark" style="font-size:12px;background-color: lightcoral;">
+            <marquee>selamat datang di aplikasi management <strong>jagoanhelm.com</strong></marquee>
+        </div>
+    </div>
+
+    <div style="margin-top: 150px;">
+        {% block contents %}
+        {% endblock %}
+    </div>
+
+</body>
+
+</html>

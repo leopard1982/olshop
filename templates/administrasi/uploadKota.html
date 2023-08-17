@@ -1,0 +1,39 @@
+{% extends 'administrasi/base-admin.html'%}
+{% load static %}
+
+{% block contents%}
+<div class="container h3 fw-bold mt-4 d-flex justify-content-end">
+    <div>Upload Master Kota via CSV</div>
+</div>
+<div class="container p-2 mt-2 border border-primary rounded">
+    <h3>Upload Master Kota</h3>
+    <form method="post"  enctype="multipart/form-data">
+        {% csrf_token%}
+        {{form_kota.as_p}}
+        <input type="submit" value="Upload Master Kota" onclick="upload_propinsi()">
+    </form>
+    <hr>
+</div>
+<div class="container p-2 mb-2 border border-primary rounded " >
+    <h4>Daftar Kota</h4>
+    <hr style="border: 1px solid blue">
+    <div id="master_propinsi" class="overflow-auto" style="height:300px">
+        <table class="table">
+            <thead>
+                <th>No.</th>
+                <th>Nama Propinsi</th>
+                <th>Nama Kota</th>
+                <th>Kode Kota</th>
+            </thead>
+        {% for kota in kotanya %}
+            <tr>
+                <th>{{forloop.counter}}</th>
+                <td>{{kota.kode_propinsi.nama_propinsi}}</td>
+                <td>{{kota.nama_kota}}</td>
+                <td>{{kota.kode_kota}}</td>
+            </tr>
+        {% endfor%}
+        </table>
+    </div>
+</div>
+{% endblock %}

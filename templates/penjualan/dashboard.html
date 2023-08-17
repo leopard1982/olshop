@@ -151,7 +151,7 @@ Penjualan
 <script>
 
     $(document).ready(function() {
-        $.post('http://192.168.1.50/api/get/produk/',{
+        $.post('/api/get/produk/',{
             'filter':'',
             'csrfmiddlewaretoken':$("input[name=csrfmiddlewaretoken]").val(),
         },

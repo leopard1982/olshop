@@ -1,0 +1,37 @@
+{% extends 'administrasi/base-admin.html'%}
+{% load static %}
+
+{% block contents%}
+<div class="container h3 fw-bold mt-4 d-flex justify-content-end">
+    <div>Upload Master Propinsi via CSV</div>
+</div>
+<div class="container p-2 mt-2 border border-primary rounded">
+    <h3>Upload Master Propinsi</h3>
+    <form method="post"  enctype="multipart/form-data">
+        {% csrf_token%}
+        {{form_propinsi.as_p}}
+        <input type="submit" value="Upload Master Propinsi" onclick="upload_propinsi()">
+    </form>
+    <hr>
+</div>
+<div class="container p-2 mb-2 border border-primary rounded " >
+    <h4>Daftar Propinsi</h4>
+    <hr style="border: 1px solid blue">
+    <div id="master_propinsi" class="overflow-auto" style="height:300px">
+        <table class="table">
+            <thead>
+                <th>No.</th>
+                <th>Kode Propinsi</th>
+                <th>Nama Propinsi</th>
+            </thead>
+        {% for propinsi in propinsinya %}
+            <tr>
+                <th>{{forloop.counter}}</th>
+                <td>{{propinsi.kode_propinsi}}</td>
+                <td>{{propinsi.nama_propinsi}}</td>
+            </tr>
+        {% endfor%}
+        </table>
+    </div>
+</div>
+{% endblock %}

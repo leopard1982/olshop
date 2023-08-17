@@ -1,0 +1,39 @@
+{% extends 'administrasi/base-admin.html'%}
+{% load static %}
+
+{% block contents%}
+<div class="container h3 fw-bold mt-4 d-flex justify-content-end">
+    <div>Upload Master Kecamatan via CSV</div>
+</div>
+<div class="container p-2 mt-2 border border-primary rounded">
+    <h3>Upload Master Kecamatan</h3>
+    <form method="post"  enctype="multipart/form-data">
+        {% csrf_token%}
+        {{form_kecamatan.as_p}}
+        <input type="submit" value="Upload Master Kecamatan" onclick="upload_propinsi()">
+    </form>
+    <hr>
+</div>
+<div class="container p-2 mb-2 border border-primary rounded " >
+    <h4>Daftar Kecamatan</h4>
+    <hr style="border: 1px solid blue">
+    <div id="master_propinsi" class="overflow-auto" style="height:300px">
+        <table class="table">
+            <thead>
+                <th>No.</th>
+                <th>Nama Kota/ Kabupaten</th>
+                <th>Nama Kecamatan</th>
+                <th>Kode Kecamatan</th>
+            </thead>
+        {% for kecamatan in kecamatannya %}
+            <tr>
+                <th>{{forloop.counter}}</th>
+                <td>{{kecamatan.kode_kota.nama_kota}}</td>
+                <td>{{kecamatan.nama_kota}}</td>
+                <td>{{kecamatan.kode_kecamatan}}</td>
+            </tr>
+        {% endfor%}
+        </table>
+    </div>
+</div>
+{% endblock %}

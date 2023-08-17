@@ -14,28 +14,94 @@
 </head>
 
 <body>
-    <!--modal konfirmasi-->
-    <div class="modal fade" id="modalKonfirmasi">
-    
+    <input type="hidden" id="nomor_hp_user" value="{{data_info.nomor_hp}}">
+    <input type="hidden" id="alamat_user" value="{{data_info.alamat}}">
+    <input type="hidden" id="propinsi_user" value="{{data_info.propinsi}}">
+    <input type="hidden" id="kota_user" value="{{data_info.kota}}">
+    <input type="hidden" id="kecamatan_user" value="{{data_info.kecamatan}}">
+    <input type="hidden" id="username_login" value="{{user.username}}">
+
+<!--modal Ganti Password-->
+<div class="modal fade" id="modalGantiPassword">
+
+    <div class="modal-dialog w-100">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header text-white fw-bold bg-secondary">
+                <h2 class="modal-title text-white fw-bold">Ganti Password</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form>
+            <!-- Modal body -->
+                <div class="modal-body">
+                    <input type="password" name="password_awal" id="password_awal" class="my-2 form-control" placeholder="Password Lama" required>
+                    <input type="password" name="password_baru1" id="password_baru1" class="my-2 form-control" placeholder="Password Baru" required>
+                    <input type="password" name="password_baru2" id="password_baru2" class="my-2 form-control" placeholder="Konfirmasi Password" required>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer d-flex justify-content-center">
+                    <button type="button" class="mx-2 btn btn-outline-danger" data-bs-dismiss="modal">Batal</button>
+                    <input type="button" class="mx-2 btn btn-primary" data-bs-dismiss="modal" value="Ganti" onclick="ganti_password_proses()"/>
+                </div>
+            </form>
+        </div>
+      </div>
+  </div>
+<!--end Modal Informasi User-->
+
+    <!--modal Informasi User-->
+    <div class="modal fade" id="modalInformasiUser">
+
         <div class="modal-dialog w-100">
             <div class="modal-content">
-        
+
+                <!-- Modal Header -->
+                <div class="modal-header text-white fw-bold bg-primary">
+                    <h2 class="modal-title text-white fw-bold">Informasi User</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form method="post" action="/adm/user/info/">
+                    {% csrf_token%}
+                <!-- Modal body -->
+                    <div class="modal-body">
+                        <div id="info_body">{{form_user_informasi.as_p}}</div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button type="button" class="mx-2 btn btn-outline-danger" data-bs-dismiss="modal">Batal</button>
+                        <input type="submit" class="mx-2 btn btn-primary" data-bs-dismiss="modal" value="Simpan"/>
+                    </div>
+                </form>
+            </div>
+          </div>
+      </div>
+    <!--end Modal Informasi User-->
+
+    <!--modal konfirmasi-->
+    <div class="modal fade" id="modalKonfirmasi">
+
+        <div class="modal-dialog w-100">
+            <div class="modal-content">
+
               <!-- Modal Header -->
               <div class="modal-header text-white fw-bold bg-warning">
                 <h2 class="modal-title text-white fw-bold" id="konfirmasi_header"></h2>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
               </div>
-        
+
               <!-- Modal body -->
               <div class="modal-body">
                 <div id="konfirmasi_body"></div>
               </div>
-        
+
               <!-- Modal footer -->
               <div class="modal-footer d-flex justify-content-center">
                 <button type="button" class="mx-2 btn btn-outline-danger" data-bs-dismiss="modal">OK</button>
             </div>
-        
+
             </div>
           </div>
       </div>
@@ -45,16 +111,16 @@
 
     <!--Modal Login-->
     <div class="modal fade" id="modalLogin">
-    
+
         <div class="modal-dialog w-100">
             <div class="modal-content">
-        
+
               <!-- Modal Header -->
               <div class="modal-header text-white fw-bold bg-primary">
                 <h2 class="modal-title text-white fw-bold">LOGIN</h2>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
               </div>
-        
+
               <!-- Modal body -->
               <div class="modal-body">
                 <div>Username:</div>
@@ -63,7 +129,7 @@
                 <div><input type="password" placeholder="Password" class="form-control shadow" id="password_login"></div>
 
               </div>
-        
+
               <!-- Modal footer -->
               <div class="modal-footer d-flex justify-content-center">
                 <div>
@@ -74,7 +140,7 @@
                     Not Have An Account? <a href="#" onclick="show_modalregister()">Register</a>
                 </div>
               </div>
-        
+
             </div>
           </div>
       </div>
@@ -82,23 +148,23 @@
 
         <!--Modal Register-->
         <div class="modal fade" id="modalRegister">
-    
+
             <div class="modal-dialog w-100">
                 <div class="modal-content">
-            
+
                   <!-- Modal Header -->
                   <div class="modal-header text-white fw-bold bg-success">
                     <h2 class="modal-title text-white fw-bold">REGISTER NEW USER</h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                   </div>
-            
+
                   <!-- Modal body -->
                   <div class="modal-body">
                     <form>
                     {{form.as_p}}
                     </form>
                   </div>
-            
+
                   <!-- Modal footer -->
                   <div class="modal-footer d-flex justify-content-center">
                     <div>
@@ -109,7 +175,7 @@
                         Already User? <a href="#" onclick="show_login()">Login</a>
                     </div>
                   </div>
-            
+
                 </div>
               </div>
           </div>
@@ -118,16 +184,16 @@
 
         <!-- Modal View List -->
         <div class="modal fade" id="myModal">
-    
+
             <div class="modal-dialog w-100">
                 <div class="modal-content">
-            
+
                   <!-- Modal Header -->
                   <div class="modal-header text-white fw-bold bg-danger">
                     <h2 class="modal-title text-white fw-bold" id="header_modal"></h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                   </div>
-            
+
                   <!-- Modal body -->
                   <div class="modal-body">
                       <div class="d-flex row justify-content-center">
@@ -143,26 +209,26 @@
                                   <button class="btn btn-success" style="font-size:12px"><i class="fa fa-credit-card mx-2"></i> Beli Sekarang</button>
                               </div>
                           </div>
-  
+
                       </div>
                   </div>
-            
+
                   <!-- Modal footer -->
                   <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Tutup</button>
                   </div>
-            
+
                 </div>
               </div>
           </div>
           <!--end of modal-->
     {%csrf_token%}
     <div class="container-fluid fixed-top bg-white shadow" style="border-bottom:2px solid red;">
-                    
+
             <div class="row d-flex justify-content-sm-between justify-content-md-between justify-content-lg-between justify-content-xl-between justify-content-xxl-between">
                 <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-1 col-sm-1 col-1 py-2">
                     <div class="d-flex ">
-                        <img src={% static 'img/jagoanhelm.png'%} style="width:60px;height:60px;margin-top:5px"/><span class="h4 py-4 text-danger fw-bold d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block">jagoanhelm.com</span>
+                        <img src={% static 'img/jagoanhelm.png'%} style="width:60px;height:60px;margin-top:5px"/><span class="h5 py-4 text-danger fw-bold d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block">jagoanhelm.com</span>
                     </div>
                 </div>
                 <div class="col-1 py-2" style="padding-top:14px !important">
@@ -179,7 +245,7 @@
                 </div>
                 <div class="py-2 col-xxl-5 col-xl-5 col-lg-4 col-md-8 col-sm-8 col-8">
                     <div class="d-flex justify-content-center">
-                        <div class="text-secondary bg-danger my-3 py-1 px-2 rounded-pill rounded-end" style="border-top:1px solid red;border-bottom:1px solid red; border-left:1px solid red;height:40px"><i class="text-white fa fa-search"></i></div><input type="text" id="key_cari" class="h5 my-3 shadow form-control rounded-pill  rounded-start" style="border-left:0px;border-color:red"  onchange="tampil_search()" onfocusout="sembunyikan()" onclick="tampil_search()" onmouseover="tampil_search()" onkeyup="tampil_search()" placeholder="search in jagoanhelm..." autocomplete="on"/>   
+                        <div class="text-secondary bg-danger my-3 py-1 px-2 rounded-pill rounded-end" style="border-top:1px solid red;border-bottom:1px solid red; border-left:1px solid red;height:40px"><i class="text-white fa fa-search"></i></div><input type="text" id="key_cari" class="h5 my-3 shadow form-control rounded-pill  rounded-start" style="border-left:0px;border-color:red"  onchange="tampil_search()" onfocusout="sembunyikan()" onclick="tampil_search()" onmouseover="tampil_search()" onkeyup="tampil_search()" placeholder="search in jagoanhelm..." autocomplete="on"/>
                     </div>
                     <div class="d-none position-relative" id="pencarian" onmouseleave="sembunyikan()">
                         <span class="position-absolute top-100 start-0 w-100  bg-white border p-2 overflow-auto border-danger rounded border-1" style="height:300px;width:200px">
@@ -190,39 +256,56 @@
                 </div>
                 <div class="col-1 col-sm-1 col-md-1 col-lg-4 col-xl-3 col-xxl-3 py-3 d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block ">
                     <div class="d-flex justify-content-evenly">
+                            {% if user.is_authenticated %}
                             <a href="#" class="btn btn-outline-danger" title="My Shopping Cart"><span><i class="m-2 fa fa-cart-plus  " style="font-size:20px"></i></span></a>
                             <a href="#" class="btn btn-outline-danger" title="My Notification"><span><i class="m-2 fa fa-bell "  style="font-size:20px"></i></span></a>
                             <a href="#" class="btn btn-outline-danger" title="My Mail"><span><i class="m-2 fa fa-envelope "  style="font-size:20px"></i></span></a>
+                            {% else %}
+                            <a href="#" class="btn btn-outline-secondary" title="My Shopping Cart"><span><i class="m-2 fa fa-cart-plus  " style="font-size:20px"></i></span></a>
+                            <a href="#" class="btn btn-outline-secondary" title="My Notification"><span><i class="m-2 fa fa-bell "  style="font-size:20px"></i></span></a>
+                            <a href="#" class="btn btn-outline-secondary" title="My Mail"><span><i class="m-2 fa fa-envelope "  style="font-size:20px"></i></span></a>
+                            {% endif%}
                             <div class="dropdown">
-                                <a href="#" class="btn btn-outline-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" title="My Account"><span><i class="m-2 fa fa-user "  style="font-size:20px"></i></span></a>
-                                <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" href="#" onclick="show_login()">Login</a></li>
-                                  <li><a class="dropdown-item" href="#" onclick="show_modalregister()">Register</a></li>
+
+
+                                {% if user.is_authenticated %}
+                                    <a href="#" class="btn btn-outline-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" title="My Account"><span><i class="m-2 fa fa-user "  style="font-size:20px"></i></span></a>
+                                    <ul class="dropdown-menu">
+                                    <li class="bg-danger "><a class="dropdown-item disabled text-white" href="#">welcome <strong>{{user.username}}</strong>!</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="ganti_password()">Ganti Password</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="user_information()">Detail Informasi User</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="logout_sistem()">Logout</a></li>
+
+                                {% else%}
+                                    <a href="#" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" title="My Account"><span><i class="m-2 fa fa-user "  style="font-size:20px"></i></span></a>
+                                    <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#" onclick="show_login()">Login</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="show_modalregister()">Register</a></li>
+                                {% endif%}
                                 </ul>
                             </div>
-                            
+
+                        </div>
                     </div>
-                    <div class='d-flex justify-content-center'>
-                        {% if user.is_authenticated %}
-                        <div class="text-center  px-2 col-10 text-white mt-1 bg-danger rounded-pill" style="font-size:12px">welcome.. <strong>{{user.username}}<strong>!</div>
-                        {% else %}
-                        <div class="text-center px-2 col-10 border border-danger mt-1 border-1 rounded-pill text-danger" style="font-size:12px">hi.. please <strong style="cursor:pointer" onclick="show_login()"><u>login</u></strong>!</div>
-                        {% endif%}
-                    </div>
-                </div>
+
                 <div class="col-2 d-block d-sm-block d-md-block d-lg-none  d-xl-none d-xxl-none">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-bars h2 text-danger py-4" aria-hidden="true"></i>
                     </a>
                     <ul class="dropdown-menu w-100 border border-danger shadow"  aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item " href="#"><i class="mx-2 pt-4 fa fa-user "></i> My Account: <span style="margin-top:-100px"> <button class="bg-primary border border-primary text-white rounded mx-2" onclick="show_login()">login</button><button class="border border-success bg-white rounded mx-2" onclick="show_modalregister()">register</button></span></a></li>
+                        {% if user.is_authenticated%}
+                            <li><a class="dropdown-item " href="#"><i class="mx-2 pt-4 fa fa-user "></i> Welcome.. <strong>{{user.username}}</strong>! <span style="margin-top:-100px"></li>
+                            <li><button class="bg-primary  text-white rounded mx-2" onclick="ganti_password()">ganti password</button><button class="bg-success  rounded mx-2 text-white" onclick="user_information()">user information</button><button class="bg-success  rounded mx-2 text-white" onclick="logout_sistem()">logout</button></span></a></li>
+                        {% else%}
+                            <li><a class="dropdown-item " href="#"><i class="mx-2 pt-4 fa fa-user "></i> My Account: <span style="margin-top:-100px"> <button class="bg-primary border border-primary text-white rounded mx-2" onclick="show_login()">login</button><button class="border border-success bg-white rounded mx-2" onclick="show_modalregister()">register</button></span></a></li>
+                        {% endif%}
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item " href="#"><i class="mx-2 fa fa-cart-plus" aria-hidden="true"></i> My Shopping Cart</a></li>
                         <li><a class="dropdown-item " href="#"><i class="mx-2 fa fa-bell text-secondary "></i> My Notification</a></li>
                         <li><a class="dropdown-item " href="#"><i class="mx-2 fa fa-envelope  text-secondary"></i> My Mail</a></li>
 
                     </ul>
-                    
+
                 </div>
             </div>
 
@@ -316,10 +399,10 @@
                 $("#key_cari_tampil").text("<Silakan Masukkan Pencarian>");
                 $("#hasil_ajax").empty();
             } else {
-                
+
                 /*ajax action*/
-               
-                $.post('http://192.168.1.50/api/get/produk/',
+
+                $.post('/api/get/produk/',
                 {
                     "filter": cari,
                     "csrfmiddlewaretoken":csrfmiddlewaretokennya
@@ -349,11 +432,12 @@
                                 gambar.push(element.gambar7);
                             if (element.gambar8!=null)
                                 gambar.push(element.gambar8);
-                            
+
                             {% comment %} mobile {% endcomment %}
-                            let template = "<div class='container d-block d-sm-block d-md-none d-lg-none d-xl-none d-xxl-none  mx-2 bg-white' style='border: 1px solid lightcoral;cursor:pointer;' id='mobile_"+element.produk_kode+"'>" +
-                                    "<img src='" + element.gambar1 +"'  style='border:1px solid white;height:100px;width:140px;margin-top:10px;margin-bottom:10px;border-radius:10px'/>" +
-                                    "<strong>"+element.produk_nama+"</strong>"+
+                             let template = "<div class='container justify-content-center d-flex d-sm-flex d-md-none d-lg-none d-xl-none d-xxl-none  bg-white' style='border: 1px solid lightcoral;cursor:pointer;' id='mobile_"+element.produk_kode+"'>" +
+                                    "<img src='" + element.gambar1 +"'  style='margin-right:5px;border:1px solid white;height:100px;width:140px;margin-top:10px;margin-bottom:10px;border-radius:10px'/>" +
+                                    "<div class='row justify-content-center text-center align-items-center d-flex' style='font-size:13px;'><div class='col-12 w-100'><strong>"+element.produk_nama+"</strong></div>"+
+                                    "<div class='w-100 col-12'>Harga: <strong>" + ubahKeUang(element.produk_harga) +"</strong></div></div></div>";
                                     "Harga: <strong>" + ubahKeUang(element.produk_harga) +"</strong></div>";
                                     $("#hasil_ajax").append(template);
                                     $("#mobile_" + element.produk_kode).mouseover(function() {
@@ -365,7 +449,7 @@
                                             $("#gambar_model").append(
                                                 "<img src='" + gambar[i]+"' class='items2 mx-2 rounded shadow' style='width:200px;height:200px'>"
                                             );
-                                        } 
+                                        }
                                         $("#myModal").modal("show");
                                     });
                             {% comment %} PC {% endcomment %}
@@ -383,9 +467,9 @@
                                                     $("#gambar_model").append(
                                                         "<img src='" + gambar[i]+"' class='items mx-2 rounded shadow' style='width:200px;height:200px'>"
                                                     );
-                                                } 
+                                                }
                                                 $("#myModal").modal("show");
-                                            });    
+                                            });
                         });
                     }
                 },"json"
@@ -462,9 +546,34 @@
                     $("#konfirmasi_body").text("Password Pertama dan Kedua harus sama yah....");
                     $("#modalKonfirmasi").modal("show");
                 } else {
-                    $("#konfirmasi_header").text("Data Sudah Lengkap!");
-                    $("#konfirmasi_body").text("Silakan Klik OK untuk melanjutkan Pendaftaran User Baru...");
-                    $("#modalKonfirmasi").modal("show");
+                    $.ajax({
+                        type: "POST",
+                        url: "/adm/c/users/",
+                        data: {
+                            'csrfmiddlewaretoken':csrfmiddlewaretokennya,
+                            'username':username,
+                            'password':password,
+                            'first_name':first_name,
+                            'last_name':last_name,
+                            'email':email,
+                        },
+                        success: function(data) {
+                            if(data.success==true) {
+                                window.location.reload();
+                            } else {
+                                $("#konfirmasi_header").text("Registrasi Gagal!");
+                                $("#konfirmasi_body").text("Username pernah didaftarkan! Silakan Login yah...");
+                                $("#modalKonfirmasi").modal("show");
+                            }
+                        },
+                        error: function(data) {
+                            $("#konfirmasi_header").text("Registrasi Gagal!");
+                            $("#konfirmasi_body").text("Server Sistem sedang Bermasalah! Silakan coba lagi nanti yah...");
+                            $("#modalKonfirmasi").modal("show");
+
+                        }
+                    });
+
                 }
             }
         }
@@ -481,8 +590,126 @@
                 $("#konfirmasi_body").text("Username dan Password Harus diisi yah...");
                 $("#modalKonfirmasi").modal("show");
             } else {
-                window.location.reload();
+                $.ajax({
+                    type: "POST",
+                    url:"/adm/l/users/",
+                    data: {
+                        'csrfmiddlewaretoken':csrfmiddlewaretokennya,
+                        'user_login':username,
+                        'password_login':password
+                    },
+                    success: function(data) {
+                        if(data.success==true) {
+                            window.location.reload();
+                        } else {
+                            $("#konfirmasi_header").text("Login Gagal!");
+                            $("#konfirmasi_body").text("Username dan Password tidak cocok. Silakan coba lagi ya....");
+                            $("#modalKonfirmasi").modal("show");
+                        }
+                    },
+                    error: function(data) {
+                        console.log(data);
+                    }
+                });
             }
+        }
+        function logout_sistem() {
+            window.location.href = "/adm/lo/users/";
+        }
+
+        function user_information() {
+            let nama_user = $("#username_login").val();
+            $("#id_user_id").val(nama_user);
+            $("#id_nomor_hp").val($("#nomor_hp_user").val());
+            $("#id_alamat").val($("#alamat_user").val());
+            //$("select[name=propinsi] option[value='"+$("#propinsi_user").val() +"']").attrs("selected","selected");
+            //$("select[name='propinsi'] option[value='JAWA TENGAH']").attrs("selected","selected");
+            $("#id_propinsi option:contains('"+ $("#propinsi_user").val()+"')").attr("selected","selected");
+            $("#id_kota option:contains('" + $("#kota_user").val() + "')").attr("selected","selected");
+            $("#id_kecamatan option:contains('" + $("#kecamatan_user").val() + "')").attr("selected","selected"); 
+            $("#modalInformasiUser").modal("show");
+        }
+
+        function propinsi_changeed() {
+
+            $("#id_kecamatan").empty();
+            $("#id_kecamatan").append("<option value=''>---------</option>");
+            $("#id_kota").empty();
+            $("#id_kota").append("<option value=''>---------</option>");
+            $.ajax({
+                type: "POST",
+                url:'/adm/api/get/kota/',
+                data : {
+                    'csrfmiddlewaretoken':csrfmiddlewaretokennya,
+                    'propinsi': $("#id_propinsi").val(),
+                },
+                success : function (data) {
+                    let optionnya="";
+                    data.forEach(function(val,key){
+                        optionnya = "<option value='" + val.kode_kota + "'>" + val.nama_kota + "</option>";
+                        $("#id_kota").append(optionnya);
+                    })
+                }
+            });
+        }
+
+        function kota_changeed() {
+            $("#id_kecamatan").empty();
+            $("#id_kecamatan").append("<option value=''>---------</option>");
+            $.ajax({
+                type: "POST",
+                url:'/adm/api/get/kecamatan/',
+                data : {
+                    'csrfmiddlewaretoken':csrfmiddlewaretokennya,
+                    'kota': $("#id_kota").val(),
+                },
+                success : function (data) {
+                    let optionnya="";
+                    data.forEach(function(val,key){
+                        optionnya = "<option value='" + val.kode_kecamatan + "'>" + val.nama_kecamatan + "</option>";
+                        $("#id_kecamatan").append(optionnya);
+                    })
+                }
+            });
+
+        }
+        
+        $(document).ready(function() {
+            $("#id_propinsi").change(function() {
+                propinsi_changeed();
+            });
+
+            $("#id_kota").change(function() {
+                kota_changeed();
+            });
+        });
+
+        function ganti_password() {
+            $("#modalGantiPassword").modal('show');
+        }
+
+        function ganti_password_proses() {
+            $.ajax({
+                type: 'POST',
+                url: '/adm/user/password/',
+                data: {
+                    'password_lama': $("#password_awal").val(),
+                    'password_baru1': $("#password_baru1").val(),
+                    'password_baru2': $("#password_baru2").val(),
+                    'csrfmiddlewaretoken': csrfmiddlewaretokennya
+                },
+                success: function(data) {
+                    if (data.result==true) {
+                        $("#konfirmasi_header").text("Ganti Password Berhasil!");
+                        $("#konfirmasi_body").text("Password sudah berhasil Ganti. Untuk Login Selanjutnya menggunakan password baru!");
+                        $("#modalKonfirmasi").modal("show");
+                    } else {
+                        $("#konfirmasi_header").text("Ganti Password Gagal!");
+                        $("#konfirmasi_body").text("Password tidak berhasil diubah. kemungkinan password awal salah, atau password baru dan konfirmasi berbeda. coba cek kembali yah!");
+                        $("#modalKonfirmasi").modal("show");
+                    }
+                }
+            });
         }
     </script>
 </body>
