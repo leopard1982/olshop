@@ -294,16 +294,22 @@
                     </a>
                     <ul class="dropdown-menu w-100 border border-danger shadow"  aria-labelledby="navbarDropdown">
                         {% if user.is_authenticated%}
-                            <li><a class="dropdown-item " href="#"><i class="mx-2 pt-4 fa fa-user "></i> Welcome.. <strong>{{user.username}}</strong>! <span style="margin-top:-100px"></li>
+                            <li><a class="dropdown-item text-danger" href="#"><i class="mx-2 pt-4 fa fa-user "></i> Welcome.. <strong>{{user.username}}</strong>! <span style="margin-top:-100px"></li>
                             <li><button class="bg-primary  text-white rounded mx-2" onclick="ganti_password()">ganti password</button><button class="bg-success  rounded mx-2 text-white" onclick="user_information()">user information</button><button class="bg-success  rounded mx-2 text-white" onclick="logout_sistem()">logout</button></span></a></li>
                         {% else%}
                             <li><a class="dropdown-item " href="#"><i class="mx-2 pt-4 fa fa-user "></i> My Account: <span style="margin-top:-100px"> <button class="bg-primary border border-primary text-white rounded mx-2" onclick="show_login()">login</button><button class="border border-success bg-white rounded mx-2" onclick="show_modalregister()">register</button></span></a></li>
                         {% endif%}
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item " href="#"><i class="mx-2 fa fa-cart-plus" aria-hidden="true"></i> My Shopping Cart</a></li>
-                        <li><a class="dropdown-item " href="#"><i class="mx-2 fa fa-bell text-secondary "></i> My Notification</a></li>
-                        <li><a class="dropdown-item " href="#"><i class="mx-2 fa fa-envelope  text-secondary"></i> My Mail</a></li>
-
+                            <li><hr class="dropdown-divider"></li>
+    
+                        {% if user.is_authenticated %}
+                            <li><a class="dropdown-item text-danger" href="#"><i class="mx-2 fa fa-cart-plus" aria-hidden="true"></i> My Shopping Cart</a></li>
+                            <li><a class="dropdown-item text-danger" href="#"><i class="mx-2 fa fa-bell text-secondary "></i> My Notification</a></li>
+                            <li><a class="dropdown-item text-danger" href="#"><i class="mx-2 fa fa-envelope  text-secondary"></i> My Mail</a></li>
+                        {% else%}
+                            <li><a class="dropdown-item " href="#"><i class="mx-2 fa fa-cart-plus" aria-hidden="true"></i> My Shopping Cart</a></li>
+                            <li><a class="dropdown-item " href="#"><i class="mx-2 fa fa-bell text-secondary "></i> My Notification</a></li>
+                            <li><a class="dropdown-item " href="#"><i class="mx-2 fa fa-envelope  text-secondary"></i> My Mail</a></li>
+                        {% endif%}
                     </ul>
 
                 </div>

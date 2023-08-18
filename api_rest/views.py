@@ -28,3 +28,10 @@ def get_produk(request):
         return Response(serial.data)
     else:
         return Response({'error':'Invalid'})
+
+def view_produk(request):
+    data = Produk.objects.all()
+    context = {
+        'data':data
+    }
+    return render(request, 'rest_api/aturItem.html',context)

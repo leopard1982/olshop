@@ -15,7 +15,14 @@
     <hr>
 </div>
 <div class="container p-2 mb-2 border border-primary rounded " >
-    <h4>Daftar Propinsi</h4>
+    <div class="d-flex justify-content-between">
+        <div class="col-6">
+            <h4><strong>Daftar Propinsi</strong></h4>
+        </div>
+        <div class="col-6">
+            <input type="text" class="form-control " placeholder="search in propinsi" id="search" onkeyup="filternya()">
+        </div>
+    </div>
     <hr style="border: 1px solid blue">
     <div id="master_propinsi" class="overflow-auto" style="height:300px">
         <table class="table">
@@ -24,14 +31,24 @@
                 <th>Kode Propinsi</th>
                 <th>Nama Propinsi</th>
             </thead>
+            <tbody id="mytable">
         {% for propinsi in propinsinya %}
-            <tr>
-                <th>{{forloop.counter}}</th>
-                <td>{{propinsi.kode_propinsi}}</td>
-                <td>{{propinsi.nama_propinsi}}</td>
-            </tr>
+                <tr>
+                    <th>{{forloop.counter}}</th>
+                    <td>{{propinsi.kode_propinsi}}</td>
+                    <td>{{propinsi.nama_propinsi}}</td>
+                </tr>
         {% endfor%}
+            </tbody>
         </table>
     </div>
 </div>
+<script>
+    function filternya() {
+        var value = $("#search").val().toLowerCase();
+        $("#mytable tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    }
+</script>
 {% endblock %}

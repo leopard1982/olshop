@@ -1,0 +1,58 @@
+{% extends 'administrasi/base-admin.html'%}
+{% load static %}
+{% load humanize%}
+{% block contents%}
+<div class="container">
+    <div class="d-flex justify-content-center">
+        <div class="col-6 h3 fw-bold">Daftar Produk</div>
+        <div class="col-6"><input type="text" class="form-control" placeholder="Pencarian Barang" id="cari" onkeyup="cari()"></div>
+    </div>
+    <table class="table" style="font-size:12px">
+        <thead>
+            <th>No.</th>
+            <th>Kode Produk</th>
+            <th>Nama Produk</th>
+            <th>Detail Info</th>
+            <th style="width:550px"><span class="px-4">Gambar</span></th>
+        </thead>
+        <tbody id="mytable">
+            {% for row in data %}
+                <tr>
+                    <th>{{forloop.counter}}</th>
+                    <th>{{row.produk_kode}}</th>
+                    <th>{{row.produk_nama}}</th>
+                    <td>
+                        <strong>Harga:</strong> Rp.{{row.produk_harga|intcomma}}.00 <br>
+                        <strong>Diskon:</strong> Rp.{{row.produk_diskon|intcomma}}.00 <br>
+                        <strong>Diskon Aktif/Tidak:</strong> {% if row.diskon_aktif %}aktif{%else%}tidak{%endif%}<br>
+                        <strong>Jumlah Terjual (riil):</strong> {{row.terjual_asli|intcomma}}<br>
+                        <strong>Jumlah Terjual (Up Produk):</strong> {{row.terjual_fake|intcomma}}<br>
+                        <strong>Produk New:</strong> {% if row.produk_new %}aktif{%else%}tidak{%endif%}<br>
+                        <strong>Produk Rekomendasi:</strong> {% if row.produk_rekomendasi %}aktif{%else%}tidak{%endif%}
+                    </td>
+                    <td>
+                        <div class="overflow-auto p-4">
+                            {% if row.gambar1 %}<img src="{{row.gambar1.url}}" class="rounded shadow m-1 items3" style="width:100px;height:100px"/>{% endif %}
+                            {% if row.gambar2 %}<img src="{{row.gambar2.url}}" class="rounded shadow m-1 items3" style="width:100px;height:100px"/>{% endif %}
+                            {% if row.gambar3 %}<img src="{{row.gambar3.url}}" class="rounded shadow m-1 items3" style="width:100px;height:100px"/>{% endif %}
+                            {% if row.gambar4 %}<img src="{{row.gambar4.url}}" class="rounded shadow m-1 items3" style="width:100px;height:100px"/>{% endif %}
+                            {% if row.gambar5 %}<img src="{{row.gambar5.url}}" class="rounded shadow m-1 items3" style="width:100px;height:100px"/>{% endif %}
+                            {% if row.gambar6 %}<img src="{{row.gambar6.url}}" class="rounded shadow m-1 items3" style="width:100px;height:100px"/>{% endif %}
+                            {% if row.gambar7 %}<img src="{{row.gambar7.url}}" class="rounded shadow m-1 items3" style="width:100px;height:100px"/>{% endif %}
+                            {% if row.gambar8 %}<img src="{{row.gambar8.url}}" class="rounded shadow m-1 items3" style="width:100px;height:100px"/>{% endif %}
+                        </div>
+                    </td>
+                </tr>
+            {% endfor%}
+        </tbody>
+    </table>
+</div>
+    <script>
+        function cari() {
+            var value = $("#cari").val().toLowerCase();
+            $("#mytable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        }
+    </script>
+{% endblock%}

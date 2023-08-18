@@ -7,9 +7,9 @@ from administrasi.models import UserInformations
 def dashboard(request):
     form = formUsers()
     form_user_informasi = formUserInformations()
-    if request.user.is_authenticated:
+    try:
         data_info = UserInformations.objects.get(user_id=request.user.username)
-    else:
+    except:
         data_info = None
 
     context = {
