@@ -45,3 +45,10 @@ def add_cart (request):
             return Response({'status':True,'jumlah_shopping':jumlah_shopping})
              
     return Response({'status':False})
+
+@api_view(['POST'])
+def get_cart(request):
+    if request.method == 'POST':
+        jumlah = shoppingCart.objects.all().filter(username_cart=User.objects.get(username=request.user.username)).count()
+        return Response({'jumlah':jumlah})
+    return Response({'jumlah':0})

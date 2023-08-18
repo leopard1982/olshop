@@ -154,6 +154,20 @@ Penjualan
 <script>
 
     $(document).ready(function() {
+        //untuk setting jumlah cart
+        $.ajax({
+            type: "POST",
+            url: "/get/cart/",
+            data: {
+                'csrfmiddlewaretoken':csrfmiddlewaretokennya,
+                '':''
+            },
+            success: function(data) {
+                $("#jumlah_cart").text(data.jumlah)
+                $("#jumlah_cart2").text(data.jumlah)
+            }
+        });
+
         $.post('/api/get/produk/',{
             'filter':'',
             'csrfmiddlewaretoken':$("input[name=csrfmiddlewaretoken]").val(),

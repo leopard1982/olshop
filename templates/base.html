@@ -271,7 +271,7 @@
                                 {% if user.is_authenticated %}
                                     <a href="#" class="btn btn-outline-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" title="My Account"><span><i class="m-2 fa fa-user "  style="font-size:20px"></i></span></a>
                                     <ul class="dropdown-menu">
-                                    <li class="bg-danger "><a class="dropdown-item disabled text-white" href="#">welcome <strong>{{user.username}}</strong>!</a><span class="badge bg-danger" id="jumlah_cart2"></span></li>
+                                    <li class="bg-danger "><a class="dropdown-item disabled text-white" href="#">welcome <strong>{{user.username}}</strong>!</a></li>
                                     <li><a class="dropdown-item" href="#" onclick="ganti_password()">Ganti Password</a></li>
                                     <li><a class="dropdown-item" href="#" onclick="user_information()">Detail Informasi User</a></li>
                                     <li><a class="dropdown-item" href="#" onclick="logout_sistem()">Logout</a></li>
@@ -302,7 +302,7 @@
                             <li><hr class="dropdown-divider"></li>
     
                         {% if user.is_authenticated %}
-                            <li><a class="dropdown-item text-danger" href="#"><i class="mx-2 fa fa-cart-plus" aria-hidden="true"></i> My Shopping Cart</a></li>
+                            <li><a class="dropdown-item text-danger" href="#"><i class="mx-2 fa fa-cart-plus" aria-hidden="true"></i> My Shopping Cart <span class="badge bg-danger" id="jumlah_cart2"></span></a> </li>
                             <li><a class="dropdown-item text-danger" href="#"><i class="mx-2 fa fa-bell text-secondary "></i> My Notification</a></li>
                             <li><a class="dropdown-item text-danger" href="#"><i class="mx-2 fa fa-envelope  text-secondary"></i> My Mail</a></li>
                         {% else%}
