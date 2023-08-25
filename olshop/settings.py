@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'api_rest',
     'corsheaders',
+    # 'user_unique_email'
 ]
 
 MIDDLEWARE = [
@@ -59,6 +60,8 @@ MIDDLEWARE = [
 CORS_ORIGIN_ALLOW_ALL = True   
 
 ROOT_URLCONF = 'olshop.urls'
+
+# AUTH_USER_MODEL = 'user_unique_email.User'
 
 TEMPLATES = [
     {

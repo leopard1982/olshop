@@ -19,7 +19,7 @@ def dashboard(request):
 @api_view(['POST','GET'])
 def createUser(request):
     if request.method == 'POST':
-        try:
+        # try:
             forms = User()
             forms.username = request.POST['username'].lower()
             forms.password = request.POST['password']
@@ -27,7 +27,7 @@ def createUser(request):
             forms.first_name = request.POST['first_name']
             forms.last_name = request.POST['last_name']
             forms.save()
-            forms=User.objects.get(username=request.POST['username'])
+            forms=User.objects.get(username=request.POST['username'].lower())
             forms.set_password(request.POST['password'])
             forms.save()
             user = authenticate(username=request.POST['username'].lower(),password=request.POST['password'])
@@ -36,8 +36,8 @@ def createUser(request):
                 return Response({'success':True})
             else:
                 return Response({'success':False})
-        except:
-            return Response({'success':False})
+        # except:
+            # return Response({'success':False})
 
     return Response({'success':False})
 
@@ -45,13 +45,16 @@ def createUser(request):
 @api_view(['POST','GET'])
 def loginUser(request):
     if request.method == 'POST':
-        username=request.POST['user_login'].lower()
-        password=request.POST['password_login']
-        user = authenticate(username=username, password=password)
-        print(user)
-        if(user is not None):
-            login(request,user)
-            return Response({'success': True})
+        try:
+            username=request.POST['user_login'].lower()
+            password=request.POST['password_login']
+            user = authenticate(username=username, password=password)
+            print(user)
+            if(user is not None):
+                login(request,user)
+                return Response({'success': True})
+        except:
+            return Response({'success': False})
     return Response({'success': False})
 
 def logoutUser(request):

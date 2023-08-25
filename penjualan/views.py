@@ -8,6 +8,7 @@ from penjualan.models import shoppingCart
 from django.contrib.auth.models import User
 from api_rest.models import Produk
 from django.db.models import F, Count
+from penjualan.serializernya import serialCart
 
 # Create your views here.
 def dashboard(request):
@@ -41,14 +42,31 @@ def add_cart (request):
             jumlah_shopping = shoppingCart.objects.filter(username_cart = User.objects.get(username=request.user.username)).count()
             # jumlah_shopping = shoppingCart.objects.values('kode_produk').filter(username_cart = User.objects.get(username=request.user.username)).annotate(jumlah_itemnya=Count('kode_produk'))
             #jumlah_shopping = shoppingCart.objects.annotate(jumlah_itemnya=Count('kode_produk')).count()
-            print(jumlah_shopping)
-            return Response({'status':True,'jumlah_shopping':jumlah_shopping})
+            myshoppingcart = serialCart(shoppingCart.objects.all().filter(username_cart = User.objects.get(username=request.user.username)),many=True)
+
+            context = {
+                'status':True,
+                'jumlah_shopping':jumlah_shopping,
+                'myshoppingcart':myshoppingcart.data
+            }
+            return Response(context)
              
     return Response({'status':False})
 
 @api_view(['POST'])
 def get_cart(request):
     if request.method == 'POST':
-        jumlah = shoppingCart.objects.all().filter(username_cart=User.objects.get(username=request.user.username)).count()
-        return Response({'jumlah':jumlah})
+        # try:
+            jumlah = shoppingCart.objects.all().filter(username_cart=request.user.username).count()
+        # except:
+        #     jumlah=0
+            
+            myshoppingcart = serialCart(shoppingCart.objects.all().filter(username_cart = request.user.username),many=True)
+            print(myshoppingcart.data)
+            context = {
+                'status':True,
+                'jumlah_shopping':jumlah,
+                'myshoppingcart':myshoppingcart.data
+            }
+            return Response(context)
     return Response({'jumlah':0})

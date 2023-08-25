@@ -8,8 +8,8 @@ Penjualan
 {% block contents %}
 
         <!-- The Modal -->
-        <div class="modal fade" id="myModal2">
-            <div class="modal-dialog w-100">
+        <div class="modal fade vh-100" id="myModal2">
+            <div class="modal-dialog w-100 ">
                 <div class="modal-content">
             
                   <!-- Modal Header -->
@@ -25,7 +25,7 @@ Penjualan
                           <div class="d-flex overflow-auto p-2 mx-3 border border-danger border-1 rounded" id="gambar_model2"></div>
                           <div class="  my-2 border border-danger border-1 bg-white shadow p-2">
                               <div><u>DESKRIPSI PRODUK:</u></div>
-                              <div id="isi_modal2"></div>
+                              <div id="isi_modal2" class=" overflow-auto" style="height:100px"></div>
 
                               <div class="d-flex my-2 text-danger"><span class="py-2">Jumlah: </span><input type="Number" min="1" id="jumlah_item" value="1" class="mx-2 form-control w-25"></div>
                           </div>
@@ -163,8 +163,30 @@ Penjualan
                 '':''
             },
             success: function(data) {
-                $("#jumlah_cart").text(data.jumlah)
-                $("#jumlah_cart2").text(data.jumlah)
+                console.log(data);
+                if(data.jumlah_shopping>99) {
+                    $("#jumlah_cart").text("99+");
+                    $("#jumlah_cart2").text("99+");
+                } else {
+                    $("#jumlah_cart").text(data.jumlah_shopping);
+                    $("#jumlah_cart2").text(data.jumlah_shopping);
+                }
+                $("#myshoppingcart").empty();
+                $("#listCartHP").empty();
+                data.myshoppingcart.forEach(function(mydata) {
+                    comp_hp = "<div class='p-2 m-2 border border-danger rounded' style='cursor:pointer' id='listHP_" + mydata.kode_produk.produk_kode +"'><div class='row'><div class='col-3'><img class='w-100  rounded ' src='"+ mydata.kode_produk.gambar1 +"'></div><div class='col-9 d-flex align-items-center  py-2'><strong style='font-size:12px'>"+ mydata.kode_produk.produk_nama.toUpperCase() + "<strong><br>Jumlah Shopping Cart: <strong>" + mydata.jumlah +"</strong> item (s)</div></div></div>";
+                    comp_komputer = "<li class='p-1 m-2 border border-danger rounded' id='listComp_" + mydata.kode_produk.produk_kode +"' title='klik untuk membeli: " + mydata.kode_produk.produk_nama.toUpperCase() +"'><a class='dropdown-item' href='#' style='font-size:10px'><div class='row'><div class='col-3'><img class='w-100  rounded ' src='"+ mydata.kode_produk.gambar1 +"'></div><div class='col-9 d-flex align-items-center  py-2'><strong style='font-size:12px'>"+ mydata.kode_produk.produk_nama.toUpperCase() + "<strong><br>Jumlah Shopping Cart: <strong>" + mydata.jumlah +"</strong> item (s)</div></div></a></li>";
+                    $("#myshoppingcart").append(comp_komputer);
+                    $("#listCartHP").append(comp_hp);
+                    $("#listHP_" + mydata.kode_produk.produk_kode).click(function() {
+                        alert('hallo ini: ' + mydata.kode_produk.produk_nama);
+                    });
+                    $("#listComp_" + mydata.kode_produk.produk_kode).click(function() {
+                        alert('hallo ini: ' + mydata.kode_produk.produk_nama);
+                    });
+                    //print(mydata.kode_produk);
+                });
+                console.log(data);
             }
         });
 
@@ -313,8 +335,29 @@ Penjualan
                     $("#konfirmasi_header").text("Berhasil Ditambahkan!");
                     $("#konfirmasi_body").text("Item: " + $("#header_modal2").text() + " berhasil ditambahkan sebanyak: "+ jumlah_barang +" !");
                     $("#myModal2").modal("hide");
-                    $("#jumlah_cart").text(data.jumlah_shopping)
-                    $("#jumlah_cart2").text(data.jumlah_shopping)
+                    if(data.jumlah_shopping>99) {
+                        $("#jumlah_cart").text("99+");
+                        $("#jumlah_cart2").text("99+");
+                    } else {
+                        $("#jumlah_cart").text(data.jumlah_shopping);
+                        $("#jumlah_cart2").text(data.jumlah_shopping);
+                    }
+                    $("#myshoppingcart").empty();
+                    $("#listCartHP").empty();
+                    data.myshoppingcart.forEach(function(mydata) {
+                        comp_hp = "<div class='p-2 m-2 border border-danger rounded' style='cursor:pointer' id='listHP_" + mydata.kode_produk.produk_kode +"'><div class='row'><div class='col-3'><img class='w-100  rounded ' src='"+ mydata.kode_produk.gambar1 +"'></div><div class='col-9 d-flex align-items-center  py-2'><strong style='font-size:12px'>"+ mydata.kode_produk.produk_nama.toUpperCase() + "<strong><br>Jumlah Shopping Cart: <strong>" + mydata.jumlah +"</strong> item (s)</div></div></div>";
+                        comp_komputer = "<li class='p-1 m-2 border border-danger rounded' id='listComp_" + mydata.kode_produk.produk_kode +"' title='klik untuk membeli: " + mydata.kode_produk.produk_nama.toUpperCase() +"'><a class='dropdown-item' href='#' style='font-size:10px'><div class='row'><div class='col-3'><img class='w-100  rounded ' src='"+ mydata.kode_produk.gambar1 +"'></div><div class='col-9 d-flex align-items-center  py-2'><strong style='font-size:12px'>"+ mydata.kode_produk.produk_nama.toUpperCase() + "<strong><br>Jumlah Shopping Cart: <strong>" + mydata.jumlah +"</strong> item (s)</div></div></a></li>";
+                        $("#myshoppingcart").append(comp_komputer);
+                        $("#listCartHP").append(comp_hp);
+                        $("#listHP_" + mydata.kode_produk.produk_kode).click(function() {
+                            alert('hallo ini: ' + mydata.kode_produk.produk_nama);
+                        });
+                        $("#listComp_" + mydata.kode_produk.produk_kode).click(function() {
+                            alert('hallo ini: ' + mydata.kode_produk.produk_nama);
+                        });
+                        //print(mydata.kode_produk);
+                    });
+                    console.log(data);
                     $("#modalKonfirmasi").modal("show");    
                 } else {
                     $("#konfirmasi_header").text("Gagal Ditambahkan!");
