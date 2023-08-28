@@ -13,13 +13,14 @@
     <title>Online Shop</title>
 </head>
 
-<body>
+<body class="bg-white">
     <input type="hidden" id="nomor_hp_user" value="{{data_info.nomor_hp}}">
     <input type="hidden" id="alamat_user" value="{{data_info.alamat}}">
     <input type="hidden" id="propinsi_user" value="{{data_info.propinsi}}">
     <input type="hidden" id="kota_user" value="{{data_info.kota}}">
     <input type="hidden" id="kecamatan_user" value="{{data_info.kecamatan}}">
     <input type="hidden" id="username_login" value="{{user.username}}">
+
 
 <!--modal Ganti Password-->
 <div class="modal fade" id="modalGantiPassword">
@@ -222,7 +223,7 @@
                   <!-- Modal body -->
                   <div class="modal-body">
                       <div class="d-flex row justify-content-center">
-                          <div class="d-flex overflow-auto p-2 mx-3 border border-danger border-1 rounded" id="gambar_model"></div>
+                          <div class="overflow-auto p-2 mx-3 border border-danger border-1 rounded" id="gambar_model"></div>
                           <div  class="  my-2 border border-danger border-1 bg-white p-2">
                               <div><u>DESKRIPSI PRODUK:</u></div>
                               <div id="isi_modal" class="overflow-auto" style="height:300px"></div>
@@ -253,7 +254,13 @@
             <div class="row d-flex justify-content-sm-between justify-content-md-between justify-content-lg-between justify-content-xl-between justify-content-xxl-between">
                 <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-1 col-sm-1 col-1 py-2">
                     <div class="d-flex ">
-                        <img src={% static 'img/jagoanhelm.png'%} style="width:60px;height:60px;margin-top:5px"/><span class="h5 py-4 text-danger fw-bold d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block">jagoanhelm.com</span>
+                        <img src={% static 'img/jagoanhelm.png'%} style="width:60px;height:60px;margin-top:5px"/>
+                        <div id="modalRequest" >
+                            <div class="spinner-border position-absolute text-danger"  style="margin-left:-44px;margin-top:25px" role="status">
+                                <span class="sr-only text-danger " style="font-size:9px">Loading...</span>
+                              </div>
+                        </div>
+                        <span class="h5 py-4 text-danger fw-bold d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block">jagoanhelm.com</span>
                     </div>
                 </div>
                 <div class="col-1 py-2" style="padding-top:14px !important">
@@ -289,12 +296,12 @@
                                 </ul>
                             </div>
                                 {% comment %} <a href="#" class="btn btn-outline-danger" title="My Shopping Cart"><span><i class="m-2 fa fa-cart-plus  " style="font-size:20px"></i><span class="badge bg-danger position-sticky" id="jumlah_cart" style="font-size:10px;margin-top:-20px"></span></span></a> {% endcomment %}
-                            <a href="#" class="btn btn-outline-danger" title="My Notification"><span><i class="m-2 fa fa-bell "  style="font-size:20px"></i></span></a>
-                            <a href="#" class="btn btn-outline-danger" title="My Mail"><span><i class="m-2 fa fa-envelope "  style="font-size:20px"></i></span></a>
+                                <a href="#" class="btn btn-outline-danger" title="My WishList"><span><i class="m-2 fa fa-heart "  style="font-size:20px"></i><span class="badge bg-danger position-absolute rounded p-1" id="jumlah_whislist" style="font-size:8px;margin-top:20px;margin-left:-5px"></span></span></a>
+                                <a href="#" class="btn btn-outline-danger" title="My Notification"><span><i class="m-2 fa fa-bell "  style="font-size:20px"></i></span></a>                          
                             {% else %}
                             <a href="#" class="btn btn-outline-secondary" title="My Shopping Cart"><span><i class="m-2 fa fa-cart-plus  " style="font-size:20px"></i></span></a>
+                            <a href="#" class="btn btn-outline-secondary" title="My WishList"><span><i class="m-2 fa fa-heart "  style="font-size:20px"></i></span></a>
                             <a href="#" class="btn btn-outline-secondary" title="My Notification"><span><i class="m-2 fa fa-bell "  style="font-size:20px"></i></span></a>
-                            <a href="#" class="btn btn-outline-secondary" title="My Mail"><span><i class="m-2 fa fa-envelope "  style="font-size:20px"></i></span></a>
                             {% endif%}
                             <div class="dropdown">
 
@@ -334,12 +341,12 @@
     
                         {% if user.is_authenticated %}
                             <li><a class="dropdown-item text-danger" href="#" onclick="showListShoppingCart()"><i class="mx-2 fa fa-cart-plus" aria-hidden="true"></i> My Shopping Cart <span class="badge bg-danger" id="jumlah_cart2"></span></a> </li>
-                            <li><a class="dropdown-item text-danger" href="#"><i class="mx-2 fa fa-bell text-secondary "></i> My Notification</a></li>
-                            <li><a class="dropdown-item text-danger" href="#"><i class="mx-2 fa fa-envelope  text-secondary"></i> My Mail</a></li>
+                            <li><a class="dropdown-item text-danger" href="#"><i class="mx-2 fa fa-heart  text-danger"></i> My WishList <span class="badge bg-danger" id="jumlah_whislist2"></span></a></li>
+                            <li><a class="dropdown-item text-danger" href="#"><i class="mx-2 fa fa-bell text-danger "></i> My Notification</a></li>
                         {% else%}
                             <li><a class="dropdown-item " href="#"><i class="mx-2 fa fa-cart-plus" aria-hidden="true"></i> My Shopping Cart</a></li>
+                            <li><a class="dropdown-item " href="#"><i class="mx-2 fa fa-heart  text-secondary"></i> My WishList</a></li>
                             <li><a class="dropdown-item " href="#"><i class="mx-2 fa fa-bell text-secondary "></i> My Notification</a></li>
-                            <li><a class="dropdown-item " href="#"><i class="mx-2 fa fa-envelope  text-secondary"></i> My Mail</a></li>
                         {% endif%}
                     </ul>
 
@@ -391,39 +398,38 @@
 
     <div class="footer" style="margin-top:20px;border-top:2px solid grey">
         <div class="row p-3 d-flex justify-content-center justify-content-sm-center justify-content-md-center justify-content-lg-between justify-content-xl-between justify-content-xxl-between" style="font-size:12px">
-            <div class="col-11 mx-2 col-sm-11 col-md-11 col-lg-4 col-xl-4 col-xxl-4 mx-1 p-2 bg-white">
-                <div>Find Our Store:</div>
-                <div class="text-danger"><strong >jagoanhelm.com</strong></div>
-                <div>
-                    Ruko Arcadia Blok BD No. 120<br>
-                    Jl. Pulo Sirih Utama RT.004/RW.015<br>
-                    Jaka Setia, Kec. Bekasi Selatan<br>
-                    Kota Bekasi, Jawa Barat 17148
+            <div class="col-11 mx-2 col-sm-11 col-md-11 col-lg-6 col-xl-6 col-xxl-6 mx-1 p-2 bg-white d-flex justify-content-center">
+                <div class='d-flex justify-content-center p-2  col-6'>
+                    <div>
+                        <strong>Find Our Store:</strong><br>
+                        <strong class="text-danger">jagoanhelm.com</strong><br>
+                        
+                            Ruko Arcadia Blok BD No. 120<br>
+                            Jl. Pulo Sirih Utama RT.004/RW.015<br>
+                            Jaka Setia, Kec. Bekasi Selatan<br>
+                            Kota Bekasi, Jawa Barat 17148
+                        
+                    </div>
                 </div>
-                <div class="p-2">
-                    <iframe class="w-100 h-100" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.008606204307!2d106.97027480942502!3d-6.262595661283232!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e698db00b8eacf9%3A0x7ee3fad755f1e152!2sJagoan%20Helm!5e0!3m2!1sid!2sid!4v1692761541075!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
+                <div class="d-flex justify-content-center p-2 col-6"><iframe class="w-100 h-75 rounded border" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.008606204307!2d106.97027480942502!3d-6.262595661283232!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e698db00b8eacf9%3A0x7ee3fad755f1e152!2sJagoan%20Helm!5e0!3m2!1sid!2sid!4v1692761541075!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+                
             </div>
-            <div class="col-11 col-sm-11 col-md-11 col-lg-7 col-xl-7 col-xxl-7 mx-1 fw-bold" style="font-size:16px;margin-bottom:100px" >
-                <div class="my-2 p-2 border border-secondary d-flex justify-content-betweeen align-items-center">
-                    <p >Pembayaran Melalui Transfer Virtual Account Bank (konfirmasi 5-10 menit):</p>            
-                    <img class="w-50" src="{% static 'img/bank.png'%}">
+            <div class="col-11 col-sm-11 col-md-11 col-lg-5 col-xl-5 col-xxl-5 mx-1 fw-bold" style="font-size:16px;" >
+                <div class="row d-flex my-2">
+                    <div class="col-6">
+                        <div class="text-center" style="font-size:12px">Pembayaran Melalui VA:</div>            
+                        <div class="text-center"><img class="w-75" src="{% static 'img/bank.png'%}"></div>
+                    </div>
+                    <div class="col-6">
+                        <div class="text-center" style="font-size:12px">Pengiriman dilayani dengan:</div>            
+                        <div class="text-center"><img class="w-50" src="{% static 'img/jne.jpeg'%}"></div>
+                    </div>
                 </div>
-                <div class="my-2 p-2 border border-secondary d-flex justify-content-between align-items-center">
-                    <p >Pengiriman dilayani dengan:</p>            
-                    <img class="w-50" src="{% static 'img/jne.jpeg'%}">
-                </div>
-                <div class="p-2 my-2 border border-secondary">
-                    <div class="">Kunjungi Platform Kami:<div>
-                    <div class="d-flex rounded shadow justify-content-center align-items-center overflow-auto">
-                        <img class="d-flex d-sm-flex d-md-flex d-lg-none d-xl-none d-xxl-none" title="TikTok" src="{% static 'img/tiktok.png'%}"   style="width:30px;height:30px;margin-left:400px;margin-right:10px;cursor:pointer;" onclick="window.open('https://www.tokopedia.com/jagoanhelm','_blank')">
-                        <img class="d-none d-sm-none d-md-none d-lg-flex d-xl-flex d-xxl-flex" title="TikTok" src="{% static 'img/tiktok.png'%}"   style="width:30px;height:30px;margin-left:100px;margin-right:10px;cursor:pointer;" onclick="window.open('https://www.tokopedia.com/jagoanhelm','_blank')">
-                        <img title="Youtube" src="{% static 'img/youtube.png'%}"   style="width:90px;height:40px;margin:10px;cursor:pointer;" onclick="window.open('https://www.tokopedia.com/jagoanhelm','_blank')">
-                        <img title="Tokopedia" src="{% static 'img/tokopedia.png'%}"  style="width:90px;height:30px;margin:10px;cursor:pointer;" onclick="window.open('https://www.tokopedia.com/jagoanhelm','_blank')">
-                        <img title="Bukalapak" src="{% static 'img/bukalapak.png'%}"   style="width:90px;height:60px;margin:10px;cursor:pointer;" onclick="window.open('https://www.tokopedia.com/jagoanhelm','_blank')">
-                        <img title="Blibli" src="{% static 'img/blibli.png'%}"   style="width:90px;height:60px;margin:10px;cursor:pointer;" onclick="window.open('https://www.tokopedia.com/jagoanhelm','_blank')">
-                        <img title="Lazada" src="{% static 'img/lazada.png'%}"   style="width:90px;height:50px;margin:10px;cursor:pointer;" onclick="window.open('https://www.tokopedia.com/jagoanhelm','_blank')">
-                        <img title="Shopee" src="{% static 'img/shopee.png'%}"   style="width:90px;height:30px;margin-left:10px;margin-right:50px;cursor:pointer;" onclick="window.open('https://www.tokopedia.com/jagoanhelm','_blank')">
+                <div class="my-2">
+                    <div class="text-center" style="font-size:12px">Platform Kami:</div>
+                    <div class="d-flex justify-content-center">
+                        <div class="text-center mx-2 d-flex align-items-center"><img title="TikTok" src="{% static 'img/tiktok.png'%}"   style="width:25px;height:30px;cursor:pointer;" onclick="window.open('https://www.tiktok.com/@jagoanhelm?lang=id-ID','_blank')"></div>
+                        <div class="text-center mx-2 d-flex align-items-center"><img title="Youtube" src="{% static 'img/youtube.png'%}"   style="width:90px;height:50px;margin:10px;cursor:pointer;" onclick="window.open('https://www.youtube.com/channel/UCgjaFw_WnDZuXGRT-hbCmRA','_blank')"></div>
                     </div>
                 </div>
             </div>
@@ -434,7 +440,9 @@
         operated by: <strong>leopard inc</strong>
     </div>
     <script>
+
         let csrfmiddlewaretokennya=$("input[name=csrfmiddlewaretoken]").val();
+    
         function ubahKeUang(data) {
             let x = data.toString();
             let lebar = x.length-1;
@@ -523,34 +531,64 @@
                                     "Harga: <strong>" + ubahKeUang(element.produk_harga) +"</strong></div>";
                                     $("#hasil_ajax").append(template);
                                     $("#mobile_" + element.produk_kode).mouseover(function() {
-                                        $("#header_modal").text(element.produk_nama);
-                                        $("#isi_modal").html(ubahEnter(element.produk_deskripsi));
-                                        $("#harga").text(ubahKeUang(element.produk_harga));
-                                        $("#gambar_model").empty();
+                                        $("#header_modal2").text(element.produk_nama);
+                                        $("#isi_modal2").html(ubahEnter(element.produk_deskripsi));
+                                        $("#kode_barang_cart").val(element.produk_kode);
+                                        $("#harga2").text(ubahKeUang(element.produk_harga));
+                                        $("#harga_asli").val(element.produk_harga);
+                                        //get the jumlah :-)
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: '/get/cart/jumlah/',
+                                            data: {
+                                                'csrfmiddlewaretoken':csrfmiddlewaretokennya,
+                                                'kode_barang':element.produk_kode
+                                            },
+                                            success: function(data) {
+                                                $("#jumlah_item").val(data.jumlah);
+                                                $("#harga_totalnya").text(ubahKeUang(parseInt(data.jumlah)*element.produk_harga));
+                                            }
+                                        });
+                                        $("#gambar_model2").empty();
                                         for(let i=0;i<gambar.length;i++) {
-                                            $("#gambar_model").append(
+                                            $("#gambar_model2").append(
                                                 "<img src='" + gambar[i]+"' class='items2 mx-2 rounded shadow' style='width:200px;height:200px'>"
                                             );
                                         }
-                                        $("#myModal").modal("show");
+                                        $("#myModal2").modal("show");
                                     });
                             {% comment %} PC {% endcomment %}
-                            template = "<div class='container d-none d-sm-none d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-between mx-2 bg-white ' style='border: 1px solid lightcoral;cursor:pointer;' id='pc_"+element.produk_kode+"'>" +
-                                            "<div class='col-2'><img src='" + element.gambar1 +"'  style='border:1px solid white;height:100px;width:140px;margin-top:10px;margin-bottom:10px;border-radius:10px'/></div>" +
-                                            "<div class='col-8  py-4'><strong class='h3'>"+element.produk_nama+"</strong><br>"+
-                                            "Harga: <strong>" + ubahKeUang(element.produk_harga) +"</strong></div></div>";
+                            template = "<div class='d-flex justify-content-center '><div class='shadow rounded bg-white container my-2 col-11 d-none d-sm-none d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-between mx-2 bg-white ' style='border: 2px solid lightcoral;cursor:pointer;' id='pc_"+element.produk_kode+"'>" +
+                                            "<div class='col-2 mx-1'><img class='w-100' src='" + element.gambar1 +"'  style='border:1px solid white;margin-top:10px;margin-bottom:10px;border-radius:10px'/></div>" +
+                                            "<div class='col-9  py-4'><strong class='h4 text-danger'>"+element.produk_nama+"</strong><br>"+
+                                            "Harga: <strong>" + ubahKeUang(element.produk_harga) +"</strong></div></div></div>";
                                             $("#hasil_ajax").append(template);
                                             $("#pc_" + element.produk_kode).click(function() {
-                                                $("#header_modal").text(element.produk_nama);
-                                                $("#isi_modal").html(ubahEnter(element.produk_deskripsi));
-                                                $("#harga").text(ubahKeUang(element.produk_harga));
-                                                $("#gambar_model").empty();
+                                                $("#header_modal2").text(element.produk_nama);
+                                                $("#kode_barang_cart").val(element.produk_kode);
+                                                $("#isi_modal2").html(ubahEnter(element.produk_deskripsi));
+                                                $("#harga2").text(ubahKeUang(element.produk_harga));
+                                                $("#harga_asli").val(element.produk_harga);
+                                                //get the jumlah :-)
+                                                $.ajax({
+                                                    type: 'POST',
+                                                    url: '/get/cart/jumlah/',
+                                                    data: {
+                                                        'csrfmiddlewaretoken':csrfmiddlewaretokennya,
+                                                        'kode_barang':element.produk_kode
+                                                    },
+                                                    success: function(data) {
+                                                        $("#jumlah_item").val(data.jumlah);
+                                                        $("#harga_totalnya").text(ubahKeUang(parseInt(data.jumlah)*element.produk_harga));                                                    }
+                                                });
+
+                                                $("#gambar_model2").empty();
                                                 for(let i=0;i<gambar.length;i++) {
-                                                    $("#gambar_model").append(
-                                                        "<img src='" + gambar[i]+"' class='items mx-2 rounded shadow' style='width:200px;height:200px'>"
+                                                    $("#gambar_model2").append(
+                                                        "<img src='" + gambar[i]+"' class='items2 mx-2 rounded shadow'>"
                                                     );
                                                 }
-                                                $("#myModal").modal("show");
+                                                $("#myModal2").modal("show");
                                             });
                         });
                     }
@@ -764,6 +802,15 @@
             $("#id_kota").change(function() {
                 kota_changeed();
             });
+        });
+
+        $(document).ajaxStart(function() {
+            $("#modalRequest").show();
+
+        });
+        $(document).ajaxStop(function() {
+            $("#modalRequest").hide();
+
         });
 
         function ganti_password() {

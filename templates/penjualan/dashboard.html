@@ -14,25 +14,37 @@ Penjualan
             
                   <!-- Modal Header -->
                   <div class="modal-header text-white fw-bold bg-danger">
-                    <h4 class="modal-title text-white" id="header_modal2"></h4>
+                    <h4 class="modal-title text-white" id="header_modal2"></h4> &nbsp;&nbsp;
+                    {% if user.is_authenticated %}
+                    <span id="setwishlist" onclick="setwishlist()"></span>
+                    {% endif %}
+
                     <input type="hidden" id="kode_barang_cart">
+                    <input type="hidden" id="harga_asli">
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                   </div>
             
                   <!-- Modal body -->
                   <div class="modal-body">
+                      <div class="d-flex justify-content-end container"  >
+                      </div>
                       <div class="d-flex row justify-content-center">
-                          <div class="d-flex overflow-auto p-2 mx-3 border border-danger border-1 rounded" id="gambar_model2"></div>
+                          <div class="d-flex  overflow-auto p-2 " id="gambar_model2"></div>
                           <div class="  my-2 border border-danger border-1 bg-white shadow p-2">
                               <div><u>DESKRIPSI PRODUK:</u></div>
                               <div id="isi_modal2" class=" overflow-auto" style="height:100px"></div>
-
-                              <div class="d-flex my-2 text-danger"><span class="py-2">Jumlah: </span><input type="Number" min="1" id="jumlah_item" value="1" class="mx-2 form-control w-25"></div>
+                              <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex col-6 my-2 text-danger"><span class="py-2">Jumlah: </span><input type="Number" min="1" id="jumlah_item" value="1" class="mx-2 form-control w-50" onkeyup="update_jumlah()"></div>
+                                <div class="col-6">
+                                    <div class="text-center">Harga : <span id="harga2" class="fw-bold"></div>      
+                                </div>  
+                              </div>
+                              
                           </div>
                           <div class="my-2 p-2 border border-danger border-1 ">
-                              <div class="text-center">Harga : <span id="harga2"></div>
+                              <div class="justify-content-center d-flex"><div class="mx-2"><strong>Total Belanjamu:</div> <div class="mx-2" id="harga_totalnya"></div></strong></div>
                               <div class="justify-content-evenly d-flex">
-                                  <button class="btn btn-primary" style="font-size:12px" onclick="addCart()"><i class="fa fa-cart-plus mx-2"></i> Tambahkan ke Cart</button>
+                                  <button class="btn btn-primary" style="font-size:12px" onclick="addCart()"><i class="fa fa-cart-plus mx-2"></i> Masukkan Keranjang</button>
                                   <button class="btn btn-success" style="font-size:12px"><i class="fa fa-credit-card mx-2"></i> Beli Sekarang</button>
                               </div>
                           </div>
@@ -49,7 +61,7 @@ Penjualan
               </div>
         </div>
           <!--end of modal-->
-    
+          
 
 <div class="row d-flex justify-content-center" style="margin-top:20px">
     <div class=" fw-bold d-flex justify-content-between  rounded  shadow  text-white border  col-11 " style="background-color:red" >
@@ -174,19 +186,35 @@ Penjualan
                 $("#myshoppingcart").empty();
                 $("#listCartHP").empty();
                 data.myshoppingcart.forEach(function(mydata) {
-                    comp_hp = "<div class='p-2 m-2 border border-danger rounded' style='cursor:pointer' id='listHP_" + mydata.kode_produk.produk_kode +"'><div class='row'><div class='col-3'><img class='w-100  rounded ' src='"+ mydata.kode_produk.gambar1 +"'></div><div class='col-9 d-flex align-items-center  py-2'><strong style='font-size:12px'>"+ mydata.kode_produk.produk_nama.toUpperCase() + "<strong><br>Jumlah Shopping Cart: <strong>" + mydata.jumlah +"</strong> item (s)</div></div></div>";
-                    comp_komputer = "<li class='p-1 m-2 border border-danger rounded' id='listComp_" + mydata.kode_produk.produk_kode +"' title='klik untuk membeli: " + mydata.kode_produk.produk_nama.toUpperCase() +"'><a class='dropdown-item' href='#' style='font-size:10px'><div class='row'><div class='col-3'><img class='w-100  rounded ' src='"+ mydata.kode_produk.gambar1 +"'></div><div class='col-9 d-flex align-items-center  py-2'><strong style='font-size:12px'>"+ mydata.kode_produk.produk_nama.toUpperCase() + "<strong><br>Jumlah Shopping Cart: <strong>" + mydata.jumlah +"</strong> item (s)</div></div></a></li>";
+                    comp_hp = "<div class='p-2 m-2 border border-danger rounded' style='cursor:pointer' id='listHP_" + mydata.kode_produk.produk_kode +"'><div class='row'><div class='col-3 d-flex align-items-center'><img class='w-100  rounded ' src='"+ mydata.kode_produk.gambar1 +"'></div><div class='col-9 d-flex align-items-center  py-2'><strong style='font-size:12px'>"+ mydata.kode_produk.produk_nama.toUpperCase() + "<strong><br>Jumlah Shopping Cart: <strong>" + mydata.jumlah +"</strong> item (s)<br>Harga Satuan : " + ubahKeUang(mydata.kode_produk.produk_harga) +"<br>Total Belanja:" + ubahKeUang(mydata.total_harga) +"</div></div></div>";
+                    comp_komputer = "<li class='p-1 m-2 border border-danger rounded' id='listComp_" + mydata.kode_produk.produk_kode +"' title='klik untuk membeli: " + mydata.kode_produk.produk_nama.toUpperCase() +"'><a class='dropdown-item' href='#' style='font-size:10px'><div class='row '><div class='col-3  d-flex align-items-center'><img class='w-100  rounded ' src='"+ mydata.kode_produk.gambar1 +"'></div><div class='col-9 d-flex align-items-center  py-2'><strong style='font-size:12px'>"+ mydata.kode_produk.produk_nama.toUpperCase() + "<strong><br>Jumlah Shopping Cart: <strong>" + mydata.jumlah +"</strong> item (s)<br>Harga Satuan : "+ ubahKeUang(mydata.kode_produk.produk_harga) +"<br>Total Belanja:" + ubahKeUang(mydata.total_harga) +"</div></div></a></li>";
                     $("#myshoppingcart").append(comp_komputer);
                     $("#listCartHP").append(comp_hp);
                     $("#listHP_" + mydata.kode_produk.produk_kode).click(function() {
-                        alert('hallo ini: ' + mydata.kode_produk.produk_nama);
+                        get_produk_satu(mydata.kode_produk.produk_kode);
                     });
                     $("#listComp_" + mydata.kode_produk.produk_kode).click(function() {
-                        alert('hallo ini: ' + mydata.kode_produk.produk_nama);
+                        get_produk_satu(mydata.kode_produk.produk_kode);
                     });
                     //print(mydata.kode_produk);
                 });
-                console.log(data);
+                
+                $.ajax({
+                    type: "PoST",
+                    url: '/wishlist/jumlah/',
+                    data : {
+                        'csrfmiddlewaretoken':csrfmiddlewaretokennya
+                    },
+                    success: function(data) {
+                        if (parseInt(data.result)>99) {
+                            $("#jumlah_whislist").text("99+");
+                            $("#jumlah_whislist2").text("99+");
+                        } else {
+                            $("#jumlah_whislist").text(data.result);
+                            $("#jumlah_whislist2").text(data.result);
+                        }
+                    }
+                });
             }
         });
 
@@ -224,12 +252,45 @@ Penjualan
                         $("#kode_barang_cart").val(element.produk_kode);
                         $("#isi_modal2").html(ubahEnter(element.produk_deskripsi));
                         $("#harga2").text(ubahKeUang(element.produk_harga));
+                        //get the jumlah :-)
+                        $.ajax({
+                            type: 'POST',
+                            url: '/get/cart/jumlah/',
+                            data: {
+                                'csrfmiddlewaretoken':csrfmiddlewaretokennya,
+                                'kode_barang':element.produk_kode
+                            },
+                            success: function(data) {
+                                $("#jumlah_item").val(data.jumlah);
+                                $("#harga_totalnya").text(ubahKeUang(parseInt(data.jumlah)*element.produk_harga));
+                            }
+                        });
+                        $("#harga_asli").val(element.produk_harga);
                         $("#gambar_model2").empty();
                         for(let i=0;i<gambar.length;i++) {
                             $("#gambar_model2").append(
-                                "<img src='" + gambar[i]+"' class='items2 mx-2 rounded shadow' style='width:200px;height:200px'>"
+                                "<img src='" + gambar[i]+"' class='mx-2 rounded shadow items2' >"
                             );
-                        } 
+                        };
+                        $("#setwishlist").empty();
+                        $.ajax({
+                            type: "POST",
+                            url: "/wishlist/",
+                            data: {
+                                'csrfmiddlewaretoken':csrfmiddlewaretokennya,
+                                'produk_id': element.produk_kode,
+                                'ubah':false,
+                            },
+                            success: function(data) {
+                                if(data.result==true) {
+                                    $("#setwishlist").append("<i class='fa fa-heart text-white fw-bold' style='font-size:20px;cursor:pointer;' title='remove from my wishlist!'></i>");
+                                }  else {
+                                    $("#setwishlist").append("<i class='fa fa-heart-o text-white fw-bold' style='font-size:20px;cursor:pointer;' title='add to my wishlist!'></i>");
+                                };
+                                
+                
+                            }
+                        });
                         $("#myModal2").modal("show");
                     });
                 template = "<div class='items mx-2 bg-white' style='border: 1px solid lightcoral' id='pilihan_"+element.produk_kode+"'>" +
@@ -241,13 +302,45 @@ Penjualan
                             $("#header_modal2").text(element.produk_nama);
                             $("#kode_barang_cart").val(element.produk_kode);
                             $("#isi_modal2").html(ubahEnter(element.produk_deskripsi));
-                            $("#harga2").text(ubahKeUang(element.produk_harga));     
+                            $("#harga2").text(ubahKeUang(element.produk_harga));   
+                            $("#harga_asli").val(element.produk_harga);  
+                            //get the jumlah :-)
+                            $.ajax({
+                                type: 'POST',
+                                url: '/get/cart/jumlah/',
+                                data: {
+                                    'csrfmiddlewaretoken':csrfmiddlewaretokennya,
+                                    'kode_barang':element.produk_kode
+                                },
+                                success: function(data) {
+                                    $("#jumlah_item").val(data.jumlah);
+                                    $("#harga_totalnya").text(ubahKeUang(parseInt(data.jumlah)*element.produk_harga));
+                                }
+                            });
                             $("#gambar_model2").empty();
                             for(let i=0;i<gambar.length;i++) {
                                 $("#gambar_model2").append(
-                                    "<img src='" + gambar[i]+"' class='items2 mx-2 rounded shadow' style='width:200px;height:200px'>"
+                                    "<img src='" + gambar[i]+"' class='items2 mx-2 rounded shadow' >"
                                 );
                             } 
+                            $("#setwishlist").empty();
+                            $.ajax({
+                                type: "POST",
+                                url: "/wishlist/",
+                                data: {
+                                    'csrfmiddlewaretoken':csrfmiddlewaretokennya,
+                                    'produk_id': element.produk_kode,
+                                    'ubah':false,
+                                },
+                                success: function(data) {
+                                    if(data.result==true) {
+                                        $("#setwishlist").append("<i class='fa fa-heart text-white fw-bold' style='font-size:20px;cursor:pointer;' title='remove from my wishlist!'></i>");
+                                    }  else {
+                                        $("#setwishlist").append("<i class='fa fa-heart-o text-white fw-bold' style='font-size:20px;cursor:pointer;' title='add to my wishlist!'></i>");
+                                    };
+                                    
+                                }
+                            });
                             $("#myModal2").modal("show");
                         });    
                 template = "<div class='items mx-2 bg-white' style='border: 1px solid lightcoral' id='diskon_"+element.produk_kode+"'>" +
@@ -259,13 +352,46 @@ Penjualan
                                 $("#header_modal2").text(element.produk_nama);
                                 $("#kode_barang_cart").val(element.produk_kode);
                                 $("#isi_modal2").html(ubahEnter(element.produk_deskripsi));
-                                $("#harga2").text(ubahKeUang(element.produk_harga));      
+                                $("#harga2").text(ubahKeUang(element.produk_harga));   
+                                $("#harga_asli").val(element.produk_harga);   
+                                //get the jumlah :-)
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '/get/cart/jumlah/',
+                                    data: {
+                                        'csrfmiddlewaretoken':csrfmiddlewaretokennya,
+                                        'kode_barang':element.produk_kode
+                                    },
+                                    success: function(data) {
+                                        $("#jumlah_item").val(data.jumlah);
+                                        $("#harga_totalnya").text(ubahKeUang(parseInt(data.jumlah)*element.produk_harga));
+                                    }
+                                });
                                 $("#gambar_model2").empty();
                                 for(let i=0;i<gambar.length;i++) {
                                     $("#gambar_model2").append(
-                                        "<img src='" + gambar[i]+"' class='items2 mx-2 rounded shadow' style='width:200px;height:200px'>"
+                                        "<img src='" + gambar[i]+"' class='items2 mx-2 rounded shadow'>"
                                     );
                                 }    
+                                $("#setwishlist").empty();
+                                $.ajax({
+                                    type: "POST",
+                                    url: "/wishlist/",
+                                    data: {
+                                        'csrfmiddlewaretoken':csrfmiddlewaretokennya,
+                                        'produk_id': element.produk_kode,
+                                        'ubah':false,
+                                    },
+                                    success: function(data) {
+                                        if(data.result==true) {
+                                            $("#setwishlist").append("<i class='fa fa-heart text-white fw-bold' style='font-size:20px;cursor:pointer;' title='remove from my wishlist!'></i>");
+                                        }  else {
+                                            $("#setwishlist").append("<i class='fa fa-heart-o text-white fw-bold' style='font-size:20px;cursor:pointer;' title='add to my wishlist!'></i>");
+                                        };
+                                        
+                        
+                                    }
+                                });
                                 $("#myModal2").modal("show");
                             });
                 template = "<div class='items mx-2 bg-white' style='border: 1px solid lightcoral' id='semua_"+element.produk_kode+"'>" +
@@ -278,12 +404,45 @@ Penjualan
                                     $("#kode_barang_cart").val(element.produk_kode);
                                     $("#isi_modal2").html(ubahEnter(element.produk_deskripsi));
                                     $("#harga2").text(ubahKeUang(element.produk_harga)); 
+                                    $("#harga_asli").val(element.produk_harga);
+                                    //get the jumlah :-)
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: '/get/cart/jumlah/',
+                                        data: {
+                                            'csrfmiddlewaretoken':csrfmiddlewaretokennya,
+                                            'kode_barang':element.produk_kode
+                                        },
+                                        success: function(data) {
+                                            $("#jumlah_item").val(data.jumlah);
+                                            $("#harga_totalnya").text(ubahKeUang(parseInt(data.jumlah)*element.produk_harga));
+                                        }
+                                    });
                                     $("#gambar_model2").empty();      
                                     for(let i=0;i<gambar.length;i++) {
                                         $("#gambar_model2").append(
-                                            "<img src='" + gambar[i]+"' class='items2 mx-2 rounded shadow' style='width:200px;height:200px'>"
+                                            "<img src='" + gambar[i]+"' class='items2 mx-2 rounded shadow' >"
                                         );
                                     }       
+                                    $("#setwishlist").empty();
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "/wishlist/",
+                                        data: {
+                                            'csrfmiddlewaretoken':csrfmiddlewaretokennya,
+                                            'produk_id': element.produk_kode,
+                                            'ubah':false,
+                                        },
+                                        success: function(data) {
+                                            if(data.result==true) {
+                                                $("#setwishlist").append("<i class='fa fa-heart text-white fw-bold' style='font-size:20px;cursor:pointer;' title='remove from my wishlist!'></i>");
+                                            }  else {
+                                                $("#setwishlist").append("<i class='fa fa-heart-o text-white fw-bold' style='font-size:20px;cursor:pointer;' title='add to my wishlist!'></i>");
+                                            };
+                                            
+                            
+                                        }
+                                    });
                                     $("#myModal2").modal("show");
                                 });                    
                     /*$("#list_items").append(template);
@@ -332,9 +491,11 @@ Penjualan
             },
             success: function(data) {
                 if(data.status==true) {
+                    
                     $("#konfirmasi_header").text("Berhasil Ditambahkan!");
-                    $("#konfirmasi_body").text("Item: " + $("#header_modal2").text() + " berhasil ditambahkan sebanyak: "+ jumlah_barang +" !");
+                    $("#konfirmasi_body").text("Item: " + $("#header_modal2").text() + " di keranjangmu sekarang berjumlah: "+ jumlah_barang +" !");
                     $("#myModal2").modal("hide");
+                   
                     if(data.jumlah_shopping>99) {
                         $("#jumlah_cart").text("99+");
                         $("#jumlah_cart2").text("99+");
@@ -345,15 +506,15 @@ Penjualan
                     $("#myshoppingcart").empty();
                     $("#listCartHP").empty();
                     data.myshoppingcart.forEach(function(mydata) {
-                        comp_hp = "<div class='p-2 m-2 border border-danger rounded' style='cursor:pointer' id='listHP_" + mydata.kode_produk.produk_kode +"'><div class='row'><div class='col-3'><img class='w-100  rounded ' src='"+ mydata.kode_produk.gambar1 +"'></div><div class='col-9 d-flex align-items-center  py-2'><strong style='font-size:12px'>"+ mydata.kode_produk.produk_nama.toUpperCase() + "<strong><br>Jumlah Shopping Cart: <strong>" + mydata.jumlah +"</strong> item (s)</div></div></div>";
-                        comp_komputer = "<li class='p-1 m-2 border border-danger rounded' id='listComp_" + mydata.kode_produk.produk_kode +"' title='klik untuk membeli: " + mydata.kode_produk.produk_nama.toUpperCase() +"'><a class='dropdown-item' href='#' style='font-size:10px'><div class='row'><div class='col-3'><img class='w-100  rounded ' src='"+ mydata.kode_produk.gambar1 +"'></div><div class='col-9 d-flex align-items-center  py-2'><strong style='font-size:12px'>"+ mydata.kode_produk.produk_nama.toUpperCase() + "<strong><br>Jumlah Shopping Cart: <strong>" + mydata.jumlah +"</strong> item (s)</div></div></a></li>";
+                        comp_hp = "<div class='p-2 m-2 border border-danger rounded' style='cursor:pointer' id='listHP_" + mydata.kode_produk.produk_kode +"'><div class='row'><div class='col-3 d-flex align-items-center'><img class='w-100  rounded ' src='"+ mydata.kode_produk.gambar1 +"'></div><div class='col-9 d-flex align-items-center  py-2'><strong style='font-size:12px'>"+ mydata.kode_produk.produk_nama.toUpperCase() + "<strong><br>Jumlah Shopping Cart: <strong>" + mydata.jumlah +"</strong> item (s)<br>Harga Satuan : " + ubahKeUang(mydata.kode_produk.produk_harga) +"<br>Total Belanja:" + ubahKeUang(mydata.total_harga) +"</div></div></div>";
+                        comp_komputer = "<li class='p-1 m-2 border border-danger rounded' id='listComp_" + mydata.kode_produk.produk_kode +"' title='klik untuk membeli: " + mydata.kode_produk.produk_nama.toUpperCase() +"'><a class='dropdown-item' href='#' style='font-size:10px'><div class='row'><div class='col-3  d-flex align-items-center'><img class='w-100  rounded ' src='"+ mydata.kode_produk.gambar1 +"'></div><div class='col-9 d-flex align-items-center  py-2'><strong style='font-size:12px'>"+ mydata.kode_produk.produk_nama.toUpperCase() + "<strong><br>Jumlah Shopping Cart: <strong>" + mydata.jumlah +"</strong> item (s)<br>Harga Satuan : "+ ubahKeUang(mydata.kode_produk.produk_harga) +"<br>Total Belanja:" + ubahKeUang(mydata.total_harga) +"</div></div></a></li>";
                         $("#myshoppingcart").append(comp_komputer);
                         $("#listCartHP").append(comp_hp);
                         $("#listHP_" + mydata.kode_produk.produk_kode).click(function() {
-                            alert('hallo ini: ' + mydata.kode_produk.produk_nama);
+                            get_produk_satu(mydata.kode_produk.produk_kode);
                         });
                         $("#listComp_" + mydata.kode_produk.produk_kode).click(function() {
-                            alert('hallo ini: ' + mydata.kode_produk.produk_nama);
+                            get_produk_satu(mydata.kode_produk.produk_kode);
                         });
                         //print(mydata.kode_produk);
                     });
@@ -366,6 +527,138 @@ Penjualan
                     $("#modalKonfirmasi").modal("show");
                 }
             }
+        });
+    }
+
+    function setwishlist() {
+        $("#setwishlist").empty();
+        $.ajax({
+            type: "POST",
+            url: "/wishlist/",
+            data: {
+                'csrfmiddlewaretoken':csrfmiddlewaretokennya,
+                'produk_id': $("#kode_barang_cart").val(),
+                'ubah':true,
+            },
+            success: function(data) {
+                if(data.result==true) {
+                    $("#setwishlist").append("<i class='fa fa-heart text-white fw-bold' style='font-size:20px;cursor:pointer;' title='remove from my wishlist!'></i>");
+                }  else {
+                    $("#setwishlist").append("<i class='fa fa-heart-o text-white fw-bold' style='font-size:20px;cursor:pointer;' title='add to my wishlist!'></i>");
+                };
+                $.ajax({
+                    type: "PoST",
+                    url: '/wishlist/jumlah/',
+                    data : {
+                        'csrfmiddlewaretoken':csrfmiddlewaretokennya
+                    },
+                    success: function(data) {
+                        if (parseInt(data.result)>99) {
+                            $("#jumlah_whislist").text("99+");
+                            $("#jumlah_whislist2").text("99+");
+                        } else {
+                            $("#jumlah_whislist").text(data.result);
+                            $("#jumlah_whislist2").text(data.result);
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    function update_jumlah() {
+        harga = parseInt($("#harga_asli").val());
+        jumlah = parseInt($("#jumlah_item").val());
+        console.log(jumlah);
+        console.log(harga);
+        if(isNaN(jumlah)) {
+            jumlah =1;
+            $("#jumlah_item").val(1);
+        }
+
+        $("#harga_totalnya").text(ubahKeUang(harga*jumlah));
+    }
+
+    function get_produk_satu(kode_produk) {
+        $.ajax({
+            type: "POST",
+            url: "/get/cart/satu/",
+            data: {
+                'csrfmiddlewaretoken':csrfmiddlewaretokennya,
+                'kode_produk': kode_produk
+            },
+            success: function(data) {
+                let nama_produk = data.myshoppingcart.kode_produk.produk_nama;
+                let deskripsi = data.myshoppingcart.kode_produk.produk_deskripsi;
+                let jumlah = data.myshoppingcart.jumlah;
+                let harga_satuan = data.myshoppingcart.harganya;
+                let total_bayar = data.myshoppingcart.total_harga;
+
+                let gambar = [];
+                if (data.myshoppingcart.kode_produk.gambar1!=null)
+                    gambar.push(data.myshoppingcart.kode_produk.gambar1);
+                if (data.myshoppingcart.kode_produk.gambar2!=null)
+                    gambar.push(data.myshoppingcart.kode_produk.gambar2);
+                if (data.myshoppingcart.kode_produk.gambar3!=null)
+                    gambar.push(data.myshoppingcart.kode_produk.gambar3);
+                if (data.myshoppingcart.kode_produk.gambar4!=null)
+                    gambar.push(data.myshoppingcart.kode_produk.gambar4);
+                if (data.myshoppingcart.kode_produk.gambar5!=null)
+                    gambar.push(data.myshoppingcart.kode_produk.gambar5);
+                if (data.myshoppingcart.kode_produk.gambar6!=null)
+                    gambar.push(data.myshoppingcart.kode_produk.gambar6);
+                if (data.myshoppingcart.kode_produk.gambar7!=null)
+                    gambar.push(data.myshoppingcart.kode_produk.gambar7);
+                if (data.myshoppingcart.kode_produk.gambar8!=null)
+                    gambar.push(data.myshoppingcart.kode_produk.gambar8);
+                $("#gambar_model2").empty();      
+                for(let i=0;i<gambar.length;i++) {
+                    $("#gambar_model2").append(
+                      "<img src='" + gambar[i]+"' class='items2 mx-2 rounded shadow' >"
+                    );
+                }  
+
+                $("#setwishlist").empty();
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "/wishlist/",
+                                        data: {
+                                            'csrfmiddlewaretoken':csrfmiddlewaretokennya,
+                                            'produk_id': data.myshoppingcart.kode_produk.produk_kode,
+                                            'ubah':false,
+                                        },
+                                        success: function(data) {
+                                            if(data.result==true) {
+                                                $("#setwishlist").append("<i class='fa fa-heart text-white fw-bold' style='font-size:20px;cursor:pointer;' title='remove from my wishlist!'></i>");
+                                            }  else {
+                                                $("#setwishlist").append("<i class='fa fa-heart-o text-white fw-bold' style='font-size:20px;cursor:pointer;' title='add to my wishlist!'></i>");
+                                            };
+                                            
+                            
+                                        }
+                                    });
+                                 
+                                    $("#header_modal2").text(data.myshoppingcart.kode_produk.produk_nama);
+                                    $("#kode_barang_cart").val(data.myshoppingcart.kode_produk.produk_kode);
+                                    $("#isi_modal2").html(data.myshoppingcart.kode_produk.produk_deskripsi);
+                                    $("#harga2").text(data.myshoppingcart.kode_produk.produk_harga); 
+                                    $("#harga_asli").val(data.myshoppingcart.kode_produk.produk_harga);
+                                    //get the jumlah :-)
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: '/get/cart/jumlah/',
+                                        data: {
+                                            'csrfmiddlewaretoken':csrfmiddlewaretokennya,
+                                            'kode_barang':data.myshoppingcart.kode_produk.produk_kode
+                                        },
+                                        success: function(dataku) {
+                                            $("#jumlah_item").val(dataku.jumlah);
+                                            $("#harga_totalnya").text(ubahKeUang(parseInt(dataku.jumlah)*data.myshoppingcart.kode_produk.produk_harga));
+                                        }
+                                    });
+                                    $("#myModal2").modal("show");
+            }
+            
         });
     }
 </script>

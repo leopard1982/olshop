@@ -9,20 +9,27 @@ body {
     font-family: roboto;
 }
 
-.items:hover,
-.items2:hover {
+.items:hover {
     box-shadow: 2px 2px 2px 2px gold;
     border-color: red;
-    border-width: 3px;
+    border-width: 1px;
     border-right-width: 5px;
     cursor: pointer;
     transform: scale(1.1, 1.1);
 }
 
+.items2:hover {
+    box-shadow: 3px 3px 3px 3px gold;
+    border-color: red;
+    border-width: 0px;
+    cursor: pointer;
+    transform: scale(1.3, 1.3);
+}
+
 .items {
     margin: 3px;
     padding: 1px;
-    border-radius: 5px;
+    border-radius: 10px;
     width: 150px;
     min-width: 150px;
     min-height: 190px;
@@ -33,13 +40,13 @@ body {
 }
 
 .items2 {
-    margin: 3px;
+    margin: 10px;
     padding: 1px;
-    border-radius: 5px;
-    width: 190px;
-    min-width: 190px;
-    min-height: 190px;
-    height: 190px;
+    border-radius: 10px;
+    width: 100px;
+    min-width: 100px;
+    min-height: 100px;
+    height: 100px;
     border: 1px solid lightcoral;
     font-size: 12px;
     text-align: center;
@@ -49,7 +56,7 @@ body {
 .items3 {
     margin: 3px;
     padding: 1px;
-    border-radius: 5px;
+    border-radius: 10px;
     width: 100px;
     min-width: 100px;
     min-height: 100px;
@@ -63,8 +70,8 @@ body {
 .items3:hover {
     box-shadow: 2px 2px 2px 2px gold;
     border-color: red;
-    border-width: 3px;
+    border-width: 1px;
     border-right-width: 5px;
     cursor: pointer;
-    transform: scale(1.5, 1.5);
+    transform: scale(2, 2);
 }
