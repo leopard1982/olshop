@@ -183,3 +183,21 @@ def get_harga_barang(request):
         produknya = Produk.objects.get(produk_kode=request.data['kode_produk'])
         return Response({'harga': produknya.produk_harga})
     return Response({'harga': 0})
+
+
+@api_view(['POST'])
+def del_cart(request):
+    if request.method == 'POST':
+        produknya = Produk.objects.get(produk_kode=request.data['kode_produk'])
+        usernya = User.objects.get(username=request.user.username)
+        shoppingCart.objects.all().filter(username_cart=usernya,
+                                          kode_produk=produknya).delete()
+        scart = shoppingCart.objects.all().filter(username_cart=usernya)
+        jumlah = scart.count()
+        context = {
+            'result': True,
+            'jumlah': jumlah,
+            'myshoppingcart': serialCart(scart, many=True).data
+        }
+        return Response(context)
+    return Response({'result': False})

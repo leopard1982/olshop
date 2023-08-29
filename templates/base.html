@@ -108,6 +108,8 @@
       </div>
     <!--end modal list_cart_hp-->
 
+
+
     <!--modal konfirmasi-->
     <div class="modal fade" id="modalKonfirmasi">
 
@@ -143,12 +145,15 @@
 
               <!-- Modal Header -->
               <div class="modal-header text-white fw-bold bg-primary">
-                <h2 class="modal-title text-white fw-bold">LOGIN</h2>
+                <h2 class="modal-title text-white fw-bold" >LOGIN</h2>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
               </div>
 
               <!-- Modal body -->
               <div class="modal-body">
+                <div class="my-1" id="belum_login_kok">
+
+                </div>
                 <div>Username:</div>
                 <div><input type="text" placeholder="User Name" class="form-control shadow" id="user_login"/></div>
                 <div>Password:</div>
@@ -644,6 +649,7 @@
 
         function show_login() {
             $("#modalRegister").modal("hide");
+            $("#belum_login_kok").text("");
             $("#modalLogin").modal("show");
         }
 

@@ -1,6 +1,6 @@
 from django.urls import path
 from penjualan.views import dashboard, add_cart, get_cart, setWishlist, jumlahWishlist, get_jumlah, get_harga_barang
-from penjualan.views import get_cart_satu
+from penjualan.views import get_cart_satu, del_cart
 
 urlpatterns = [
     path('', dashboard, name='dashboard'),
@@ -10,5 +10,6 @@ urlpatterns = [
     path('wishlist/', setWishlist, name='set_wishlist'),
     path('wishlist/jumlah/', jumlahWishlist, name='jumlah_wishlist'),
     path('get/barang/harga/', get_harga_barang, name='get_harga_barang'),
-    path('get/cart/satu/', get_cart_satu, name='get_cart_satu')
+    path('get/cart/satu/', get_cart_satu, name='get_cart_satu'),
+    path('del/cart/', del_cart, name='del_cart'),
 ]
