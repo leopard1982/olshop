@@ -10,12 +10,10 @@ body {
 }
 
 .items:hover {
-    box-shadow: 2px 2px 2px 2px gold;
-    border-color: red;
-    border-width: 1px;
+    border-width: 3px;
     border-right-width: 5px;
     cursor: pointer;
-    transform: scale(1.1, 1.1);
+    transform: scale(1.05, 1.05);
 }
 
 .items2:hover {
@@ -29,15 +27,18 @@ body {
 .items {
     margin: 3px;
     padding: 1px;
-    border-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     width: 150px;
     min-width: 150px;
-    min-height: 190px;
-    height: 190px;
+    min-height: 220px;
+    height: 220px;
     border: 1px solid lightcoral;
     font-size: 12px;
     text-align: center;
 }
+
+
 
 .items2 {
     margin: 10px;
